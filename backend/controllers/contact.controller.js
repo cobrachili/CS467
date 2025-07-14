@@ -54,7 +54,7 @@ export const updateContact = async (req, res) => {
                 .json({ success: false, message: "Contact not found" })
         }
         try {
-            const updatedContact = await Product.findByIdAndUpdate(
+            const updatedContact = await Contact.findByIdAndUpdate(
                 id,
                 contact,
                 {
