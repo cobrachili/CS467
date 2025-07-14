@@ -8,6 +8,18 @@
     <link rel='stylesheet' type='text/css' media='screen' href='login.css'>
     <script type="text/javascript" src="validation.js" defer></script>
 </head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 40px;
+}
+</style>
 <body>
     <header>
         <h1>Job Tracker</h1>
@@ -25,8 +37,21 @@
         <section>
             <h2>Contacts</h2>
             </section>
-            <article></article>
-            </main>
+
+            <article>
+                <table>
+                    <tr>
+                        <button type="button" onclick="alert('Add Contact')">Add Contact</button>                        
+                        <th>Job Application</th>
+                        <th>Name</th>
+                        <th>Company</th>
+                        <th>Phone Number</th>
+                        <th>Email Address</th>
+                    </tr>
+                </table> 
+            </article>
+    </main>
+
      
     <footer>
         <p>&copy; 2025 Stephan Gonzales, Richard Le, Kevin Tang.</p>
