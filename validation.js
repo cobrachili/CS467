@@ -1,7 +1,28 @@
+// Date: 7/11/25
+// Adapted From:
+// https://www.youtube.com/watch?v=bVl5_UdcAy0
+// Incorporated errors and logic to check the form validation //
+
+// Date: 7/12/25
+// Adapted From:
 // https://www.w3schools.com/jsref/met_win_alert.asp
-//https://www.w3schools.com/jsref/jsref_regexp_test.asp
+// Incorporated alert() method that displays a message to the user of the errors that they input  //
+
+// Date: 7/12/25
+// Adapted From:
+// https://www.w3schools.com/jsref/jsref_regexp_test.asp
+// Learned about the test() method and how it can matches a string for error  //
+
+// Date: 7/12/25
+// Adapted From:
 // https://how.dev/answers/how-to-add-remove-toggle-class-of-a-dom-element-in-javascript
+// Learned about using .remove and .add and incorporated them for the classes of the elements //
+
+// Date: 7/12/25
+// Adapted From:
 // https://www.geeksforgeeks.org/html/html-dom-parentelement-property/
+// Learned about using parentelement and incorporated it to classes and checks //
+
 
 const form = document.getElementById("form");
 const firstname_input = document.getElementById('firstname-input');
@@ -29,6 +50,7 @@ form.addEventListener('submit', (e) => {
     }
 });
  
+// Signup Form validation 
 function getSignupFormErrors(firstname, lastname, email, password, repeatPassword) {
     let errors = []
 
@@ -101,6 +123,7 @@ function getSignupFormErrors(firstname, lastname, email, password, repeatPasswor
     return errors;
 }
 
+// Login Form validation 
 function getLoginFormErrors(email,password) {
     let errors = []
 
@@ -109,7 +132,7 @@ function getLoginFormErrors(email,password) {
         email_input.parentElement.classList.add('Incorrect');
     }
 
-    // password checks
+    
     if (password === '' || password == null) {
         errors.push('Password is required');
         password_input.parentElement.classList.add('Incorrect');
