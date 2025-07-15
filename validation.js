@@ -1,7 +1,8 @@
 // Date: 7/11/25
 // Adapted From:
 // https://www.youtube.com/watch?v=bVl5_UdcAy0
-// Incorporated errors and logic to check the form validation //
+// Incorporated errors and logic to check the form validation and usage of Incorrect as a css class for errors //
+
 
 // Date: 7/12/25
 // Adapted From:
