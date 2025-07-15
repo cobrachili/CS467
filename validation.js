@@ -53,7 +53,7 @@ form.addEventListener('submit', (e) => {
 function getSignupFormErrors(firstname, lastname, email, password, repeatPassword) {
     let errors = []
 
-    // Remove classes
+    // Remove visual errors if user successfully fixes their mistakes
     firstname_input.parentElement.classList.remove('Incorrect');
     lastname_input.parentElement.classList.remove('Incorrect');
     email_input.parentElement.classList.remove('Incorrect');
