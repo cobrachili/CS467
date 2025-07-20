@@ -1,4 +1,7 @@
+// Date: 7/18/25
+// Adapted From
 //https://www.youtube.com/watch?v=V8dYGNfHjfk&t=1743s
+//Learned how to create a localhost for mongo db
 
 const mongoose =require("mongoose")
 

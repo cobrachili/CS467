@@ -1,10 +1,17 @@
-//https://www.youtube.com/watch?v=V8dYGNfHjfk&t=1743s
+// Date: 7/18/25
+// Adapted From
+// https://www.youtube.com/watch?v=V8dYGNfHjfk&t=1743s
+// Incorporated backend login and signup with nodejs, express & mongodb
 
+// Date: 7/18/25
+// Adapted From
 // https://dev.to/jakobjingleheimer/configuring-commonjs-es-modules-for-nodejs-12ed
 //Learned how to configure commonJs for index.js to work
 
+// Date: 7/19/25
+// Adapted From
 //https://www.geeksforgeeks.org/web-tech/express-js-res-render-function/
-//Learned about render and using locals
+//Learned about render and using locals 
 
 const express = require("express")
 const app=express()
