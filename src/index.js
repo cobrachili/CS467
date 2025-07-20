@@ -1,5 +1,10 @@
 //https://www.youtube.com/watch?v=V8dYGNfHjfk&t=1743s
 
+// https://dev.to/jakobjingleheimer/configuring-commonjs-es-modules-for-nodejs-12ed
+//Learned how to configure commonJs for index.js to work
+
+//https://www.geeksforgeeks.org/web-tech/express-js-res-render-function/
+//Learned about render and using locals
 
 const express = require("express")
 const app=express()
@@ -20,6 +25,11 @@ app.get("/",(req,res) => {
 app.get("/signup",(req,res) => {
     res.render("signup")
 })
+
+
+app.get("/home", (req, res) => {
+     res.render("home")
+});
 
 // Handle signup
 app.post("/signup",async (req,res) =>{
@@ -51,7 +61,7 @@ const data={
 const user = await collection1.findOne({ email: data.email, password: data.password });
 
     if (user) {
-        res.render("home");
+        res.render("home",  { firstname: user.firstname })
     } else {
         res.send("Invalid email or password");
     }
