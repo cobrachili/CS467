@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose')
 
 const ContactSchema = mongoose.Schema(
     {
@@ -36,4 +36,4 @@ const ContactSchema = mongoose.Schema(
     }
 )
 
-export const Contact = mongoose.model("Contact", ContactSchema)
+module.exports = mongoose.model("Contact", ContactSchema)
