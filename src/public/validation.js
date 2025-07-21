@@ -50,6 +50,7 @@ form.addEventListener('submit', (e) => {
     }
 });
  
+// Signup Form validation 
 function getSignupFormErrors(firstname, lastname, email, password, repeatPassword) {
     let errors = []
 
@@ -122,6 +123,7 @@ function getSignupFormErrors(firstname, lastname, email, password, repeatPasswor
     return errors;
 }
 
+// Login Form validation 
 function getLoginFormErrors(email,password) {
     let errors = []
 
@@ -130,7 +132,7 @@ function getLoginFormErrors(email,password) {
         email_input.parentElement.classList.add('Incorrect');
     }
 
-    // password checks
+    
     if (password === '' || password == null) {
         errors.push('Password is required');
         password_input.parentElement.classList.add('Incorrect');
