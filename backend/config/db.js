@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+var mongoose = require("mongoose")
 
 module.exports = connectDB = async () => {
 	try {

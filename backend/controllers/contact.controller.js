@@ -1,24 +1,24 @@
+/* Citation:
 // Date: 7/19/25
 // Adapted From:
 // https://www.youtube.com/watch?v=9VHTDhwo9u0
-// How to use express handlebar to render pages
+// How to use express handlebar to render pages */
 
 const mongoose = require ("mongoose")
 const express = require("express")
-const Contact = require("../models/contact.model.js")
+const contact = require("../models/contact.model.js")
 const router = express.Router()
 
 
 // Get all contacts route
 router.get('/', (req, res) => {
-    Contact.find()
+    contact.find()
         .then(data => {
-            res.render('contacts/index', {contacts: data})
-            // res.status(200).json({ success: true, data: contacts })
+            res.render('contacts', {contacts: data, layout:false })
+
         })
         .catch (error =>
             console.log("Error in retrieving contacts:", error.message))
-        // res.status(500).json({ success: false, message: "Server Error" })
     })
 
 
@@ -31,7 +31,7 @@ router.get('/createOrEdit', (req, res) => {
 // Read contact
 router.get('/createOrEdit/:id', (req,res) => {
 
-    Contact.findById(req.params.id)
+    contact.findById(req.params.id)
         .then(data => res.render('contacts/createOredit',{ Contact :data}))
         
         .catch (error => 
@@ -51,11 +51,11 @@ router.post('/createorEdit', (req, res) => {
         }
         const { _id } = req.body
         if (_id == "")
-            new Contact({...contact}).save()
+            new contact({...contact}).save()
          .then(data => res.redirect("/contacts"))
          .catch(error => console.log("Server Error", error))
         else
-            Contact.findByIdAndUpdate(_id, contact)
+            contact.findByIdAndUpdate(_id, contact)
             .then( data => res.redirect("/contacts"))
             .catch(error =>console.log("Server Error", error))
         })
@@ -63,7 +63,7 @@ router.post('/createorEdit', (req, res) => {
 
 // Delete contact route
 router.post('/delete/:id', (req, res) => {
-  Contact.findByIdAndDelete(req.params.id)
+  contactontact.findByIdAndDelete(req.params.id)
     .then(data => res.redirect('/contacts'))
     .catch(error => console.log('Unable to delete:', error))
 })
