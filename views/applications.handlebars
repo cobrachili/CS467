@@ -44,6 +44,8 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
             <th>Type</th>
             <th>Date Submitted</th>
             <th>Status</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -53,6 +55,8 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
             <td>{{this.type}}</td>
             <td>{{this.date}}</td>
             <td>{{this.status}}</td>
+            <td><button class="edit-btn" data-id="{{this.id}}">Edit</button></td>
+            <td><button class="delete-btn" data-id="{{this.id}}">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
@@ -60,21 +64,21 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
 <h2>Add Application</h2>
 <p>Add a new application</p>
-<form id="add-application-form">
+<form id="add-application-form" method="post" action="/applications/add">
     <label for="input-company">Company: </label>
-    <input type="text" name="input-company" id="input-company">
+    <input type="text" name="company" id="input-company">
 
     <label for="input-type">Type: </label>
-    <select name="input-type" id="input-type">
+    <select name="type" id="input-type">
         <option value="Job">Job</option>
         <option value="Internship">Internship</option>
     </select>
 
     <label for="input-date">Date Submitted: </label>
-    <input type="date" name="input-date" id="input-date">
+    <input type="date" name="date" id="input-date">
 
     <label for="input-status">Status: </label>
-    <input type="text" name="input-status" id="input-status">
+    <input type="text" name="status" id="input-status">
 
     <input type="submit">
 </form>
@@ -83,8 +87,6 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
     <footer>
         <p>&copy; 2025 Stephan Gonzales, Richard Le, Kevin Tang.</p>
     </footer>
-
-
 
 
 </body>
