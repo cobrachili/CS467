@@ -48,6 +48,23 @@ router.post('/createorEdit', (req, res) => {
             company: req.body.company,
             emailAddress: req.body.emailAddress,
             phoneNumber: req.body.phoneNumber
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res
+                .status(404)
+                .json({ success: false, message: "Contact not found" })
+        }
+        try {
+            const updatedContact = await Contact.findByIdAndUpdate(
+                id,
+                contact,
+                {
+                    new: true,
+                }
+            )
+            res.status(200).json({ success: true, data: updatedContact })
+        } catch (error) {
+            res.status(500).json({ success: false, message: "Server Error" })
         }
         const { _id } = req.body
         if (_id == "")
@@ -68,4 +85,6 @@ router.post('/delete/:id', (req, res) => {
     .catch(error => console.log('Unable to delete:', error))
 })
 
+
 module.exports = router
+
