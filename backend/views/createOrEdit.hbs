@@ -1,0 +1,48 @@
+<!-- 
+Date: 7/13/25
+Adapted From:
+https://getbootstrap.com/docs/5.3/components/modal/#how-it-works
+How to create a modal  !-->
+
+<!-- Modal -->
+<form action="/contacts/createOrEdit" method="post"></form>
+<div id="modalArea"></div>
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="contactModalLabel">Enter Contact Details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="pb-3">
+            <label for="jobAppNumber" class="col-form-label">Job app number:</label>
+            <input type="number" class="form-control" id="job-app-num" placeholder="1" min="1">
+          </div>
+          <div class="pb-3">
+            <label for="contact-name" class="col-form-label">Contact name:</label>
+            <input type="text" class="form-control" id="contact-name" placeholder="Mike Shinoda">
+          </div>
+          <div class="pb-3">
+            <label for="company-name" class="col-form-label">Company:</label>
+            <input type="text" class="form-control" id="company-name" placeholder="Microsoft">
+          </div>
+          <div class="pb-3">
+            <label for="message-text" class="col-form-label">Email Address:</label>
+            <input type="text" class="form-control" id="email-address" placeholder="name@company.com">
+          </div>
+          <div class="pb-3">
+            <label for="phone-number" class="col-form-label">Phone:</label>
+            <input type="text" class="form-control" id="phone-number" placeholder="123-456-7890">
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

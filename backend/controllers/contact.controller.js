@@ -1,52 +1,53 @@
-import mongoose from "mongoose"
-import { Contact } from "../models/contact.model.js"
+/* Citation:
+// Date: 7/19/25
+// Adapted From:
+// https://www.youtube.com/watch?v=9VHTDhwo9u0
+// How to use express handlebar to render pages */
+
+const mongoose = require ("mongoose")
+const express = require("express")
+const contact = require("../models/contact.model.js")
+const router = express.Router()
+
 
 // Get all contacts route
-export const getContacts = async (req, res) => {
-    try {
-        const contacts = await Contact.find({})
-        res.status(200).json({ success: true, data: contacts })
-    } catch (error) {
-        console.log("Error in retrieving contacts:", error.message)
-        res.status(500).json({ success: false, message: "Server Error" })
-    }
-}
+router.get('/', (req, res) => {
+    contact.find()
+        .then(data => {
+            res.render('contacts', {contacts: data, layout:false })
 
-// Create contact route
-export const createContact = async (req, res) => {
-    const contact = req.body // user sends this data
+        })
+        .catch (error =>
+            console.log("Error in retrieving contacts:", error.message))
+    })
 
-    if (
-        !contact.jobAppNum ||
-        !contact.name ||
-        !contact.company ||
-        !contact.emailAddress ||
-        !contact.phoneNumber
-    ) {
-        return res
-            .status(400)
-            .json({
-                success: false,
-                message: "Please enter all required fields",
-            })
-    }
 
-    const newContact = new Contact(contact)
+// Get contact
+router.get('/createOrEdit', (req, res) => {
+    res.render("contacts/createOrEdit" )
 
-    try {
-        await newContact.save()
-        res.status(201).json({ success: true, data: newContact })
-    } catch (error) {
-        console.error("Error in creating contact:", error.message)
-        res.status(500).json({ success: false, message: "Server Error" })
-    }
-}
+    })
 
-// Update contact route
-export const updateContact = async (req, res) => {
-        const { id } = req.params
+// Read contact
+router.get('/createOrEdit/:id', (req,res) => {
 
-        const contact = req.body
+    contact.findById(req.params.id)
+        .then(data => res.render('contacts/createOredit',{ Contact :data}))
+        
+        .catch (error => 
+            console.log("Error in retrieving contact:", error.message))
+           
+    })
+
+
+// Create new contact
+router.post('/createorEdit', (req, res) => {
+        const contact = {
+            jobAppNum: req.body.jobAppNum,
+            name: req.body.name,
+            company: req.body.company,
+            emailAddress: req.body.emailAddress,
+            phoneNumber: req.body.phoneNumber
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res
@@ -65,23 +66,25 @@ export const updateContact = async (req, res) => {
         } catch (error) {
             res.status(500).json({ success: false, message: "Server Error" })
         }
-    }
+        const { _id } = req.body
+        if (_id == "")
+            new contact({...contact}).save()
+         .then(data => res.redirect("/contacts"))
+         .catch(error => console.log("Server Error", error))
+        else
+            contact.findByIdAndUpdate(_id, contact)
+            .then( data => res.redirect("/contacts"))
+            .catch(error =>console.log("Server Error", error))
+        })
+       
 
 // Delete contact route
-export const deleteContact = async (req, res) => {
-    const { id } = req.params
+router.post('/delete/:id', (req, res) => {
+  contactontact.findByIdAndDelete(req.params.id)
+    .then(data => res.redirect('/contacts'))
+    .catch(error => console.log('Unable to delete:', error))
+})
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res
-            .status(404)
-            .json({ success: false, message: "Contact not found" })
-    }
 
-    try {
-        await Contact.findByIdAndDelete(id)
-        res.status(200).json({ success: true, message: "Contact deleted" })
-    } catch (error) {
-        console.log("Error in deleting contact:", error.message)
-        res.status(500).json({ success: false, message: "Server Error" })
-    }
-}
+module.exports = router
+
