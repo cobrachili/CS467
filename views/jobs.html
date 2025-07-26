@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='/login.css'>
+    <script type="text/javascript" src="validation.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Job Tracker</h1>
+        <nav>
+            <a href="/home">Home</a>
+            <a href="/">Login</a>
+            <a href="applications.html">Applications</a>
+            <a href="profile.html">Profile</a>
+            <a href="contacts.html">Contacts</a>
+            <a href="skills.html">Skills</a>
+        </nav>
+    </header>
+    
+        <h1>Add Job or Internship</h1>
+        <form action="/job" method="POST">
+
+    <label>Type</label>
+    <select name="type" required>
+        <option value="Job">Job</option>
+        <option value="Internship">Internship</option>
+    </select>
+
+    <input type="text" name="company" placeholder="Company" />
+    <input type="text" name="position" placeholder="Position" />
+    <input type="text" name="location" placeholder="Location" />
+    
+<label>Status</label>
+<select name="status">
+    <option value="Applied">Applied</option>
+    <option value="Interviewing-p">Interviewing:Phone</option>
+    <option value="Interviewing-t">Interviewing:Technical</option>
+    <option value="Interviewing-o">Interviewing:Onsite</option>
+    <option value="Interviewing-f">Interviewing:Final Round</option>
+    <option value="Offered">Offered</option>
+    <option value="Rejected">Rejected</option>
+</select>
+
+    <button type="submit">Add Another</button>
+</form>
+
+        </div>
+    <main>
+        <section>
+            
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Stephan Gonzales, Richard Le, Kevin Tang.</p>
+    </footer>
+
+
+
+
+</body>
+</html>
