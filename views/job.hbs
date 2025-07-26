@@ -1,3 +1,6 @@
+{{!-- https://handlebarsjs.com/guide/builtin-helpers.html --}}
+{{!-- Used for #each to iterate over a list of items and dynamically render them --}}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Tracker</title>
-    <link rel='stylesheet' type='text/css' media='screen' href='/login.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/job.css'>
     <script type="text/javascript" src="validation.js" defer></script>
 </head>
 <body>
@@ -21,9 +24,11 @@
         </nav>
     </header>
     
-        <h1>Add Job or Internship</h1>
+        <h2>Add Job or Internship</h2>
         <form action="/job" method="POST">
 
+    
+    <div class="job-form">
     <label>Type</label>
     <select name="type" required>
         <option value="Job">Job</option>
@@ -32,21 +37,40 @@
 
     <input type="text" name="company" placeholder="Company" />
     <input type="text" name="position" placeholder="Position" />
-    <input type="text" name="location" placeholder="Location" />
+    <input type="text" name="Country" placeholder="Country" />
+    <input type="text" name="state" placeholder="State" />
+    <input type="text" name="city" placeholder="City" />
     
-<label>Status</label>
-<select name="status">
+<label>Job Status</label>
+<select name="jobStatus">
     <option value="Applied">Applied</option>
-    <option value="Interviewing-p">Interviewing:Phone</option>
-    <option value="Interviewing-t">Interviewing:Technical</option>
-    <option value="Interviewing-o">Interviewing:Onsite</option>
-    <option value="Interviewing-f">Interviewing:Final Round</option>
+    <option value="Interviewing:Phone">Interviewing:Phone</option>
+    <option value="Interviewing:Technical">Interviewing:Technical</option>
+    <option value="Interviewing:Onsite">Interviewing:Onsite</option>
+    <option value="Interviewing:Final Round">Interviewing:Final Round</option>
     <option value="Offered">Offered</option>
     <option value="Rejected">Rejected</option>
 </select>
 
     <button type="submit">Add Another</button>
 </form>
+
+<h2>List of Your Jobs/Internships:</h2>
+<ul>
+  {{#each jobs}}
+    <li>
+      <strong>Type:</strong> {{this.type}} |
+      <strong>Company:</strong> {{this.company}} |
+      <strong>Position:</strong> {{this.position}} |
+      <strong>Country:</strong> {{this.country}} |
+      <strong>State:</strong> {{this.state}} |
+      <strong>City:</strong> {{this.city}} |
+      <strong>Status:</strong> {{this.jobStatus}}
+    </li>
+  {{else}}
+    <li>No Jobs/Internships added yet.</li>
+  {{/each}}
+</ul>
 
         </div>
     <main>

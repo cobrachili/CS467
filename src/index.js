@@ -13,11 +13,24 @@
 //https://www.geeksforgeeks.org/web-tech/express-js-res-render-function/
 //Learned about render and using locals 
 
+//https://www.geeksforgeeks.org/node-js/how-to-handle-sessions-in-express/
+//Learned about express session and setting up app.use
+
+//https://www.mongodb.com/docs/manual/core/document/
+//Learned about _id and its usage in mongodb
+
 const express = require("express")
 const app=express()
 const path=require("path")
 const hbs= require("hbs")
-const { collection1} = require("./mongodb")
+const session = require('express-session')
+const { collection1, collection2} = require("./mongodb")
+
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json())
@@ -36,6 +49,11 @@ app.get("/signup",(req,res) => {
 
 app.get("/home", (req, res) => {
      res.render("home")
+})
+
+app.get("/job", async (req, res) => {
+  const jobs = await collection2.find({ userId: req.session.user._id });
+  res.render("job", { jobs });
 });
 
 // Handle signup
@@ -48,9 +66,10 @@ const data={
     password:req.body.password,
     repeatpassword:req.body.repeatpassword,
 
-};
+}
 
-await collection1.insertMany([data]);
+await collection1.insertOne([data]);
+
 
 
     res.redirect("/");
@@ -68,13 +87,31 @@ const data={
 const user = await collection1.findOne({ email: data.email, password: data.password });
 
     if (user) {
+        req.session.user = user;
         res.render("home",  { firstname: user.firstname })
     } else {
         res.send("Invalid email or password");
     }
 })
+// Handle Job
+app.post("/job", async (req, res) => {
+
+    const data = {
+        userId: req.session.user._id,
+        type: req.body.type,
+        company: req.body.company,
+        position: req.body.position,
+        country: req.body.country,
+        state: req.body.state,
+        city: req.body.city,
+        jobStatus: req.body.jobStatus,
+    };
+
+    await collection2.insertOne(data);
+    res.redirect("/job");
+});
+
 
 app.listen(3131,() => {
     console.log("port connected")
 });
-
