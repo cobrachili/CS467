@@ -51,9 +51,9 @@ app.get("/home", (req, res) => {
      res.render("home")
 })
 
-app.get("/job", async (req, res) => {
-  const jobs = await collection2.find({ userId: req.session.user._id });
-  res.render("job", { jobs });
+app.get("/skills", async (req, res) => {
+  const skills = await collection2.find({ userId: req.session.user._id });
+  res.render("skills", { skills });
 });
 
 // Handle signup
@@ -93,22 +93,18 @@ const user = await collection1.findOne({ email: data.email, password: data.passw
         res.send("Invalid email or password");
     }
 })
-// Handle Job
-app.post("/job", async (req, res) => {
+// Handle skills
+app.post("/skills", async (req, res) => {
 
     const data = {
         userId: req.session.user._id,
         type: req.body.type,
-        company: req.body.company,
-        position: req.body.position,
-        country: req.body.country,
-        state: req.body.state,
-        city: req.body.city,
-        jobStatus: req.body.jobStatus,
+        level: req.body.level,
+        category: req.body.category,
     };
 
     await collection2.insertOne(data);
-    res.redirect("/job");
+    res.redirect("/skills");
 });
 
 

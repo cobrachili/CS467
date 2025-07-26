@@ -35,7 +35,7 @@ const SignUpSchema= new mongoose.Schema({
 })
 const collection1=new mongoose.model("Collection1",SignUpSchema)
 
-const JobSchema= new mongoose.Schema({
+const skillSchema= new mongoose.Schema({
     userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Collection1", 
@@ -45,33 +45,16 @@ const JobSchema= new mongoose.Schema({
         type:String,
         required:false
     },
-    company:{
+    level:{
         type:String,
         required:false
     },
-    position:{
-        type:String,
-        required:false
-    },
-    jobStatus:{
-        type:String,
-        required:false
-    },
-    country:{
-        type:String,
-        required:false
-    },
-    state:{
-        type:String,
-        required:false
-    },
-    city:{
+    category:{
         type:String,
         required:false
     }
-
 })
-const collection2=new mongoose.model("collection2",JobSchema)
+const collection2=new mongoose.model("collection2",skillSchema)
 
 
 module.exports = { collection1, collection2 };

@@ -2,8 +2,8 @@
 :root{
 --accent-color:rgb(221, 125, 197);
 --base-color: rgb(84, 74, 224);
---text-color: 	rgb(53, 0, 70);
---input-color: white; 
+--text-color: 	rgb(221, 20, 211);
+--input-color: rgb(182, 179, 211); 
 
 }
 *{
@@ -18,7 +18,7 @@ html{
 }
 body{
     min-height: 50vh;
-    background-color: rgb(190, 190, 190);
+    background-image:url(butterflies.jpg);
     background-size: cover;
     background-position: right;
     overflow: hidden;
@@ -32,4 +32,15 @@ body{
     justify-content: center;    
     padding: 150px 20px 20px 20px
     
+}
+
+.description-box {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 600px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
 }
