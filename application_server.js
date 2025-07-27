@@ -14,30 +14,51 @@ https://www.geeksforgeeks.org/node-js/node-js-crud-operations-using-mongoose-and
 
 */
 
-require('./models/db');
-const express = require('express');
-const exphbs = require('express-handlebars');
-const path = require('path');
-const Application = require('./models/applications.model');
-const PORT = 5050;
+// Database connection setup
+const mongoose = require('mongoose');
 
+mongoose.connect('mongodb+srv://steve:testing123@cluster0.5jckiya.mongodb.net/application?retryWrites=true&w=majority&appName=Cluster0')
+
+const db = mongoose.connection;
+
+db.on("error", (error) => {
+  console.error(error);
+});
+
+db.once("open", () => {
+  console.log("Database Connected");
+});
+
+// Express and Handlebars setup
+const {create} = require('express-handlebars');
+const express = require('express');
+const { handlebars } = require('hbs');
 const app = express();
 
-app.set('views', path.join(__dirname, '/views/'));
-app.engine('hbs', exphbs({ extname: 'hbs', defaultLayout: false, layoutsDir: __dirname + '/views/layouts/' }));
-app.set('view engine', 'hbs');
+const hbs = create()
+
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
+app.set("views", "./views");
+const path=require("path")
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({extended:false}))
 
 
+// Applications Schema
+const applicationSchema = new mongoose.Schema({
+  company: String,
+  type: String,
+  date: Date,
+  status: String,
+});
 
-app.use(express.json())
-app.use(express.urlencoded({
-  extended: true
-}))
-
-app.use(express.static(__dirname + '/public'));
+const Application = mongoose.model('Application', applicationSchema);
 
 
 // Routes
+
+// Display applications
 app.get('/applications', function (req, res) {
     Application.find(function (err, applications) {
         if (err) {
@@ -49,7 +70,27 @@ app.get('/applications', function (req, res) {
     });
 });
 
+// Add application
+app.post('/applications/add', function (req, res) {
+    const newApplication = new Application({
+        company: req.body.company,
+        type: req.body.type,
+        date: req.body.date,
+        status: req.body.status
+    });
 
+    newApplication.save()
+        .then(() => {
+        res.redirect('/applications');
+        })
+        .catch(err => {
+        res.send("Error posting to Database");
+        });
+    });
+
+
+// Setup port and start server
+const PORT = 5050;
 
 app.listen(PORT, () => {
   console.log(`Now starting at port: ${PORT}`);
