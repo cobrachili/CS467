@@ -59,17 +59,10 @@ app.get("/skills", async (req, res) => {
 // Handle signup
 app.post("/signup",async (req,res) =>{
 
-const data={
-    firstname:req.body.firstname,
-    lastname:req.body.lastname,
-    email:req.body.email,
-    password:req.body.password,
-    repeatpassword:req.body.repeatpassword,
+const { firstname, lastname, email, password } = req.body;
 
-}
-
-await collection1.insertOne([data]);
-
+ const user = new collection1({ firstname, lastname, email, password });
+ await user.save();
 
 
     res.redirect("/");
