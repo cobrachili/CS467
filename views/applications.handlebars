@@ -1,0 +1,93 @@
+<!--Date: 7/19/25
+Citation:
+Adapted From
+https://www.geeksforgeeks.org/web-tech/express-js-res-render-function/
+Learned about render and using locals for home  
+
+7/19/2025
+Adapted from OSU node starter app, handlebars an express setup
+https://github.com/osu-cs340-ecampus/nodejs-starter-app
+!-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='/login.css'>
+    <script type="text/javascript" src="validation.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Job Tracker</h1>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="index.html">Login</a>
+            <a href="applications.html">Applications</a>
+            <a href="profile.html">Profile</a>
+            <a href="contacts.html">Contacts</a>
+            <a href="skills.html">Skills</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Applications</h2>
+            </section>
+            <article>
+<table id="applications-table">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Type</th>
+            <th>Date Submitted</th>
+            <th>Status</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each applications}}
+        <tr>
+            <td>{{this.company}}</td>
+            <td>{{this.type}}</td>
+            <td>{{this.date}}</td>
+            <td>{{this.status}}</td>
+            <td><button class="edit-btn" data-id="{{this.id}}">Edit</button></td>
+            <td><button class="delete-btn" data-id="{{this.id}}">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<h2>Add Application</h2>
+<p>Add a new application</p>
+<form id="add-application-form" method="post" action="/applications/add">
+    <label for="input-company">Company: </label>
+    <input type="text" name="company" id="input-company">
+
+    <label for="input-type">Type: </label>
+    <select name="type" id="input-type">
+        <option value="Job">Job</option>
+        <option value="Internship">Internship</option>
+    </select>
+
+    <label for="input-date">Date Submitted: </label>
+    <input type="date" name="date" id="input-date">
+
+    <label for="input-status">Status: </label>
+    <input type="text" name="status" id="input-status">
+
+    <input type="submit">
+</form>
+
+
+    <footer>
+        <p>&copy; 2025 Stephan Gonzales, Richard Le, Kevin Tang.</p>
+    </footer>
+
+
+</body>
+</html>
