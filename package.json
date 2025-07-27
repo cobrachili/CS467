@@ -1,7 +1,7 @@
 {
   "name": "job-contact",
   "version": "1.0.0",
-  "description": "",
+  "description": "Job Tracker Capstone Project",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon backend/index.js",
@@ -21,8 +21,15 @@
     "mongoose": "^8.16.4",
     "path": "^0.12.7",
     "hbs": "^4.2.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^17.2.0",
+    "express": "^4.21.2",
+    "express-handlebars": "^3.1.0",
+    "hbs": "^4.2.0",
+    "mongoose": "^5.13.23"
   },
   "devDependencies": {
+    "handlebars": "^4.5.0",
     "nodemon": "^3.1.10"
   }
 }
