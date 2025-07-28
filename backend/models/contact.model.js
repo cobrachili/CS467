@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose')
 
-const ContactSchema = mongoose.Schema(
+const contactSchema = mongoose.Schema(
     {
         jobAppNum: {
             type: Number,
@@ -36,4 +36,4 @@ const ContactSchema = mongoose.Schema(
     }
 )
 
-export const Contact = mongoose.model("Contact", ContactSchema)
+module.exports = mongoose.model("contact", contactSchema)
