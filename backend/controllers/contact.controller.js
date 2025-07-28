@@ -42,33 +42,20 @@ router.get('/createOrEdit/:id', (req,res) => {
 
 // Create new contact
 router.post('/createorEdit', (req, res) => {
-        const contact = {
+               const newContact = new contact({
             jobAppNum: req.body.jobAppNum,
             name: req.body.name,
             company: req.body.company,
             emailAddress: req.body.emailAddress,
-            phoneNumber: req.body.phoneNumber
-
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res
-                .status(404)
-                .json({ success: false, message: "Contact not found" })
-        }
-        try {
-            const updatedContact = await Contact.findByIdAndUpdate(
-                id,
-                contact,
-                {
-                    new: true,
-                }
-            )
-            res.status(200).json({ success: true, data: updatedContact })
-        } catch (error) {
-            res.status(500).json({ success: false, message: "Server Error" })
-        }
+            phoneNumber: req.body.phoneNumber,
+        })
+        // Console logs are for debugging purposes
+        console.log("Received form data:")
+        console.log("Name:", contact.name)
+        console.log("Email:", contact.emailAddress)
         const { _id } = req.body
         if (_id == "")
-            new contact({...contact}).save()
+            newContact.save()
          .then(data => res.redirect("/contacts"))
          .catch(error => console.log("Server Error", error))
         else
