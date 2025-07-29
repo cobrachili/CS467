@@ -24,6 +24,7 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "@types/express-handlebars": "^5.3.1",
     "handlebars": "^4.5.0",
     "nodemon": "^3.1.10"
   }

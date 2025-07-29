@@ -18,14 +18,11 @@ How to use express handlebar to render pages !-->
     <title>Job Tracker</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     
-    <link rel='stylesheet' type='text/css' media='screen' href='login.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-    <!-- <script type="text/javascript" src="validation.js" defer></script> -->
 </head>
-
-</style>
 <body>
-    <header>
+<header>
         <h1>Job Tracker</h1>
         <nav>
             <a href="home.html">Home</a>
@@ -36,23 +33,20 @@ How to use express handlebar to render pages !-->
             <a href="skills.html">Skills</a>
         </nav>
     </header>
-    
-    <main>
-        <section>
+<main>
+  <section>
             <h2>Contacts</h2>
             </section>
 
             <article>
 
+              <!-- Button trigger modal -->
+              <div class="float-end">
+            <a href="/contacts/createOrEdit" class="btn btn-primary">Add Contact </a>
+            <!-- Modal -->
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contactModal">
-  Add Contact
-</button>
-
-<!-- Modal -->
 <div id="modalArea"></div>
-<form action= /addContact method="post">
+<form action="/contacts/createOrEdit" method ="post">
 <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -82,15 +76,13 @@ How to use express handlebar to render pages !-->
             <label for="phone-number" class="col-form-label">Phone:</label>
             <input type="text" class="form-control" id="phone-number" placeholder="123-456-7890">
           </div>
-
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" form="contactModal">Submit</button>
       </div>
-     
-    </form>
+      
     </div>
   </div>
 </div>
@@ -105,38 +97,32 @@ How to use express handlebar to render pages !-->
                             <th scope="col">Email Address</th>
                         </tr>
                     </thead>
-                    <tbody id="contactData">
-                    {{#each contact}}
+                    <tbody >
+                    {{#each contacts}}
                     
                     <tr>
                         <td scope="row">{{this.jobAppNum}}</td>
                         <td scope="row">{{this.name}}</td>
                         <td scope="row">{{this.company}}</td>
-                        <td scope="row">{{this.emailAdd}}</td>
                         <td scope="row">{{this.phoneNumber}}</td>
+                        <td scope="row">{{this.emailAddress}}</td>
+            
                         <td>
                             <form action="/contacts/delete/{{this._id}}" method="post">
                                 <a href="/contacts/createOrEdit/{{this._id}}" class="btn btn-sm btn-link">Edit</a>
                                 <button type="submit" class="btn btn-sm btn-outline-danger">
                                     Delete
                                 </button>
-                </form>
-                </td>
-                </tr>
-                {{/each}}
-                </tbody>                
+                            </form>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+
                 </table> 
 
             </article>
+          
     </main>
-
-     
-    <footer>
-        <p>&copy; 2025 Stephan Gonzales, Richard Le, Kevin Tang.</p>
-    </footer>
-
-
-
-
-</body>
-</html>
+    </body>
+    </html>
