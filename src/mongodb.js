@@ -3,6 +3,8 @@
 //https://www.youtube.com/watch?v=V8dYGNfHjfk&t=1743s
 //Learned how to create a localhost for mongo db
 
+//https://mongoosejs.com/docs/schematypes.html
+//Learned about schema type as well as incorporated some_id schema for user id.
 const mongoose =require("mongoose")
 
 mongoose.connect("mongodb://localhost:27017/LoginSignUp")
@@ -31,9 +33,28 @@ const SignUpSchema= new mongoose.Schema({
     }
     
 })
-
-
 const collection1=new mongoose.model("Collection1",SignUpSchema)
 
+const skillSchema= new mongoose.Schema({
+    userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Collection1", 
+    required: true
+ },
+  type:{
+        type:String,
+        required:false
+    },
+    level:{
+        type:String,
+        required:false
+    },
+    category:{
+        type:String,
+        required:false
+    }
+})
+const collection2=new mongoose.model("collection2",skillSchema)
 
-module.exports = { collection1};
+
+module.exports = { collection1, collection2 };
