@@ -23,6 +23,11 @@
 //https://www.mongodb.com/docs/manual/core/document/
 //Learned about _id and its usage in mongodb
 
+// Date: 7/28/25
+//Adapted From
+// https://www.geeksforgeeks.org/mongodb/mongoose-document-model-create-api/\
+// Learned about using create for mongoose
+
 const express = require("express")
 const app=express()
 const path=require("path")
@@ -100,7 +105,7 @@ app.post("/skills", async (req, res) => {
         category: req.body.category,
     };
 
-    await collection2.insertOne(data);
+    await collection2.create(data);
     res.redirect("/skills");
 });
 
