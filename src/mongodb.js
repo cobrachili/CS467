@@ -3,11 +3,13 @@
 //https://www.youtube.com/watch?v=V8dYGNfHjfk&t=1743s
 //Learned how to create a localhost for mongo db
 
+// Date: 7/26/25
+// Adapted From
 //https://mongoosejs.com/docs/schematypes.html
 //Learned about schema type as well as incorporated some_id schema for user id.
 const mongoose =require("mongoose")
 
-mongoose.connect("mongodb://localhost:27017/LoginSignUp")
+mongoose.connect("mongodb+srv://steve:testing123@cluster0.5jckiya.mongodb.net/application?retryWrites=true&w=majority&appName=Cluster0")
 .then(()=>{
    console.log("mongodb connected"); 
 })
