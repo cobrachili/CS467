@@ -13,9 +13,13 @@
 //https://www.geeksforgeeks.org/web-tech/express-js-res-render-function/
 //Learned about render and using locals 
 
+// Date: 7/25/25
+// Adapted From
 //https://www.geeksforgeeks.org/node-js/how-to-handle-sessions-in-express/
 //Learned about express session and setting up app.use
 
+// Date: 7/25/25
+// Adapted From
 //https://www.mongodb.com/docs/manual/core/document/
 //Learned about _id and its usage in mongodb
 
