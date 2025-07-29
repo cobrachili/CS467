@@ -24,7 +24,7 @@ const app=express()
 const path=require("path")
 const hbs= require("hbs")
 const session = require('express-session')
-const { collection1, collection2} = require("./mongodb")
+const { collection1, collection2, Application, contact} = require("./mongodb")
 
 app.use(session({
   secret: 'your-secret-key',
@@ -37,6 +37,7 @@ app.use(express.json())
 app.set("view engine","hbs")
 app.set("views")
 app.use(express.urlencoded({extended:false}))
+
 
 app.get("/",(req,res) => {
     res.render("login")
@@ -99,6 +100,80 @@ app.post("/skills", async (req, res) => {
     await collection2.insertOne(data);
     res.redirect("/skills");
 });
+
+
+// Display applications
+app.get('/applications', function (req, res) {
+    Application.find(function (err, applications) {
+        if (err) {
+        console.error(err);
+        } 
+        else {
+        res.render("applications", {applications});
+        }
+    });
+});
+
+// Add application
+app.post('/applications/add', function (req, res) {
+    const newApplication = new Application({
+        company: req.body.company,
+        type: req.body.type,
+        date: req.body.date,
+        status: req.body.status
+    });
+
+    newApplication.save()
+        .then(() => {
+        res.redirect('/applications');
+        })
+        .catch(err => {
+        res.send("Error posting to Database");
+        });
+    });
+
+/* Get Contacts Page */
+app.get('/contacts', function(req, res, next) {
+    contact.find(function (err, contact) {
+        if (err) {
+        console.error(err);
+        } 
+        else {
+        res.render("contacts", {contact});
+        }
+    });
+})
+
+/* Post form user enters data */
+
+app.post('/contacts/add', async (req, res) => {
+    const addcontact = req.body // user sends this data
+
+    if (
+        !addcontact.jobAppNum ||
+        !addcontact.name ||
+        !addcontact.company ||
+        !addcontact.emailAddress ||
+        !addcontact.phoneNumber
+    ) {
+        return res
+            .status(400)
+            .json({
+                success: false,
+                message: "Please enter all required fields",
+            })
+    }
+
+    const newContact = new contact(addcontact)
+
+    try {
+        await newContact.save()
+        res.status(201).json({ success: true, data: newContact })
+    } catch (error) {
+        console.error("Error in creating contact:", error.message)
+        res.status(500).json({ success: false, message: "Server Error" })
+    }
+})
 
 
 app.listen(3131,() => {

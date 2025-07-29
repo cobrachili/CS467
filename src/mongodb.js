@@ -7,13 +7,19 @@
 //Learned about schema type as well as incorporated some_id schema for user id.
 const mongoose =require("mongoose")
 
-mongoose.connect("mongodb://localhost:27017/LoginSignUp")
-.then(()=>{
-   console.log("mongodb connected"); 
-})
-.catch(() =>{
-    console.log("failed to connect");
-})
+mongoose.connect('mongodb+srv://steve:testing123@cluster0.5jckiya.mongodb.net/application?retryWrites=true&w=majority&appName=Cluster0')
+
+const db = mongoose.connection;
+
+db.on("error", (error) => {
+  console.error(error);
+});
+
+db.once("open", () => {
+  console.log("Database Connected");
+});
+
+
 const SignUpSchema= new mongoose.Schema({
      firstname:{
         type:String,
@@ -56,5 +62,50 @@ const skillSchema= new mongoose.Schema({
 })
 const collection2=new mongoose.model("collection2",skillSchema)
 
+const contactSchema = mongoose.Schema(
+    {
+        jobAppNum: {
+            type: Number,
+            required: [true, "Please enter job application #"],
+            default: "1",
+        },
+        name: {
+            type: String,
+            required: [true, "Please enter First and Last name"],
+            default: "John Smith",
+        },
 
-module.exports = { collection1, collection2 };
+        company: {
+            type: String,
+            required: [true, "Please enter company name"],
+            default: "Company",
+        },
+
+        emailAddress: {
+            type: String,
+            required: [true, "Please enter email address"],
+            default: "name@email.com",
+        },
+
+        phoneNumber: {
+            type: String,
+            required: [true, "Please enter phone numbwer"],
+            default: "123-456-7890",
+        },
+    },
+    {
+        timestamps: true, // createdAt, updatedAt
+    }
+)
+const contact = mongoose.model("contact", contactSchema)
+
+// Applications Schema
+const applicationSchema = new mongoose.Schema({
+  company: String,
+  type: String,
+  date: Date,
+  status: String,
+});
+
+const Application = mongoose.model('Application', applicationSchema);
+module.exports = { collection1, collection2, Application, contact};
