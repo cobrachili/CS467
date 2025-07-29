@@ -3,6 +3,8 @@
 //https://www.youtube.com/watch?v=V8dYGNfHjfk&t=1743s
 //Learned how to create a localhost for mongo db
 
+// Date: 7/26/25
+// Adapted From
 //https://mongoosejs.com/docs/schematypes.html
 //Learned about schema type as well as incorporated some_id schema for user id.
 const mongoose =require("mongoose")

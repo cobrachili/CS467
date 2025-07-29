@@ -13,11 +13,20 @@
 //https://www.geeksforgeeks.org/web-tech/express-js-res-render-function/
 //Learned about render and using locals 
 
+// Date: 7/25/25
+// Adapted From
 //https://www.geeksforgeeks.org/node-js/how-to-handle-sessions-in-express/
 //Learned about express session and setting up app.use
 
+// Date: 7/25/25
+// Adapted From
 //https://www.mongodb.com/docs/manual/core/document/
 //Learned about _id and its usage in mongodb
+
+// Date: 7/28/25
+//Adapted From
+// https://www.geeksforgeeks.org/mongodb/mongoose-document-model-create-api/\
+// Learned about using create for mongoose
 
 const express = require("express")
 const app=express()
@@ -96,7 +105,7 @@ app.post("/skills", async (req, res) => {
         category: req.body.category,
     };
 
-    await collection2.insertOne(data);
+    await collection2.create(data);
     res.redirect("/skills");
 });
 
