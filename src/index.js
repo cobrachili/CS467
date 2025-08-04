@@ -110,6 +110,14 @@ app.post("/skills", async (req, res) => {
 });
 
 
+// Delete skills route
+app.post('/delete/:id', (req, res) => {
+  skill.findByIdAndDelete(req.params.id)
+    .then(data => res.redirect('/skills'))
+    .catch(error => console.log('Unable to delete:', error))
+})
+
+
 app.listen(3131,() => {
     console.log("port connected")
 });

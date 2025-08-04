@@ -1,0 +1,41 @@
+<!-- // Date: 7/13/25
+// Adapted From:
+// https://getbootstrap.com/docs/5.3/components/modal/#how-it-works
+// How to create a modal  !-->
+
+<form action="/contacts/createOrEdit" method="POST" >
+<input type="hidden" name="_id" value="{{contact._id}}">
+
+        <h1 class="modal-title fs-5" id="contactModalLabel">Enter Contact Details</h1>
+      {{!-- </div> --}}
+      <div class="modal-body">
+        <form>
+          <div class="form-floating mb-3">
+            <label for="jobAppNum" class="col-form-label">Job app number:</label>
+            <input type="number" class="form-control" name="jobAppNum" placeholder="1" min="1" required value="{{contact.jobAppNum}}">
+          </div>
+          <div class="form-floating  mb-3">
+            <label for="name" class="col-form-label">Contact name:</label>
+            <input type="text" class="form-control" name="name" placeholder="Mike Shinoda" required value="{{contact.name}}">
+          </div>
+          <div class="form-floating mb-3">
+            <label for="company" class="col-form-label">Company:</label>
+            <input type="text" class="form-control" name="company" placeholder="Microsoft" required value="{{contact.company}}">
+          </div>
+          <div class="form-floating mb-3">
+            <label for="emailAddress" class="col-form-label">Email Address:</label>
+            <input type="text" class="form-control" name="emailAddress" placeholder="name@company.com" required value="{{contact.emailAddress}}">
+          </div>
+          <div class="form-floating mb-3">
+            <label for="phoneNumber" class="col-form-label">Phone:</label>
+            <input type="text" class="form-control" name="phoneNumber" placeholder="123-456-7890" required value="{{contact.phoneNumber}}">
+          </div>
+
+        
+      </div>
+      <div class="modal-footer">
+        <a href="/contacts"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      
+      </div>
+      </form>

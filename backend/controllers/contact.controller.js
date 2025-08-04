@@ -67,7 +67,7 @@ router.post('/createorEdit', (req, res) => {
 
 // Delete contact route
 router.post('/delete/:id', (req, res) => {
-  contactontact.findByIdAndDelete(req.params.id)
+  contact.findByIdAndDelete(req.params.id)
     .then(data => res.redirect('/contacts'))
     .catch(error => console.log('Unable to delete:', error))
 })
