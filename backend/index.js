@@ -8,17 +8,17 @@
 // https://iamwebwiz.medium.com/how-to-fix-dirname-is-not-defined-in-es-module-scope-34d94a86694d
 // Learned how to fix CommonJS issues with ES modules */
 
-var express = require("express") 
-var dotenv = require ("dotenv")
-var path = require ("path")
+const express = require("express") 
+const dotenv = require ("dotenv")
+const path = require ("path")
 const connectDB = require("./config/db.js") 
-var { engine } = require("express-handlebars")
-var bodyParser = require ("body-parser")
+const { engine } = require("express-handlebars")
+const bodyParser = require ("body-parser")
 
 dotenv.config()
 
 
-var app = express()
+const app = express()
 const PORT = process.env.PORT
 
 // Middleware
@@ -35,15 +35,16 @@ app.use("/contacts", contactRoutes)
 // View engine setup
 app.set("views", path.join(__dirname, "views"))
 console.log(__dirname)
+
 app.engine(
     ".hbs",
     engine({
         extname: "hbs",
-        layoutsDir: path.join(__dirname, "views/contacts"),
-        defaultLayout: "index.hbs",
+        layoutsDir: path.join(__dirname, "/views/layouts"),
+        defaultLayout: false,
     })
 )
-app.set("view engine", ".hbs")
+app.set("view engine", "hbs")
 
 
 // DB connection

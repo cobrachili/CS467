@@ -38,7 +38,7 @@ const app = express();
 const hbs = create()
 
 app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
+app.set("view engine", "hbs");
 app.set("views", "./views");
 const path=require("path")
 app.use(express.static(path.join(__dirname, "public")));
@@ -87,6 +87,12 @@ app.post('/applications/add', function (req, res) {
         res.send("Error posting to Database");
         });
     });
+
+app.post('/applications/delete/:id', (req, res) => {
+  Application.findByIdAndDelete(req.params.id)
+    .then(data => res.redirect('/applications'))
+    .catch(err => console.log('error deleting application:', err));
+});
 
 
 // Setup port and start server
