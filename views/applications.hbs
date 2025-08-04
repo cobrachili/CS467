@@ -80,6 +80,15 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
     <label for="input-status">Status: </label>
     <input type="text" name="status" id="input-status">
+      <fieldset>
+    <legend>Select skills</legend>
+    {{#each skills}}
+      <label class="skills">
+        <input type="checkbox" name="skills" value="{{_id}}">
+        {{type}}
+      </label>
+    {{/each}}
+  </fieldset>
 
     <input type="submit">
 </form>

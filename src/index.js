@@ -33,7 +33,7 @@ const app=express()
 const path=require("path")
 const hbs= require("hbs")
 const session = require('express-session')
-const { collection1, collection2} = require("./mongodb")
+const { collection1, collection2, Application} = require("./mongodb")
 
 app.use(session({
   secret: 'your-secret-key',
@@ -107,6 +107,31 @@ app.post("/skills", async (req, res) => {
 
     await collection2.create(data);
     res.redirect("/skills");
+});
+
+
+// Display applications
+app.get("/applications", async (req, res) => {
+  const applications = await Application.find({ userId: req.session.user._id });
+  const skills = await collection2.find({ userId: req.session.user._id });
+  res.render("applications", { applications, skills });
+});
+
+// Add application
+
+app.post("/applications/add", async (req, res) => {
+
+const data = {
+    userId: req.session.user._id,
+    company: req.body.company,
+    type: req.body.type,
+    date: req.body.date,
+    status: req.body.status,
+    skills: req.body.skills
+};
+
+await Application.create(data);
+res.redirect("/applications");
 });
 
 
