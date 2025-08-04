@@ -55,9 +55,10 @@ form label{
     background-color: var(--accent-color);
     fill: var(--base-color);
     border-radius: 10px 0 0 10px;
-
-
 }
+
+
+
 .input-group {
     display: flex;
     width: 90%;
@@ -86,12 +87,37 @@ form label{
     border: 2px solid #f06272;
 }
 
-
-
-
 form div.Incorrect label {
     background-color: #f06272;
 }
 form div.Incorrect input{
     border-color: #f06272;
+}
+
+label.col-form-label {
+    text-align: left;
+    color: blue;
+    background-color: lightyellow;
+    padding-bottom: 5%;
+}
+
+input.form-control {
+    padding-top: 5%;
+}
+.modal-content {
+    text-align: left;
+}
+div.modal-content {
+    display: flexbox;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 40px;
 }
