@@ -28,6 +28,10 @@
 // https://www.geeksforgeeks.org/mongodb/mongoose-document-model-create-api/\
 // Learned about using create for mongoose
 
+// Date 8/4/2025
+// Using vercel with express
+// https://vercel.com/guides/using-express-with-vercel
+
 const express = require("express")
 const app=express()
 const path=require("path")
@@ -135,6 +139,8 @@ res.redirect("/applications");
 });
 
 
-app.listen(3131,() => {
+app.listen(3000,() => {
     console.log("port connected")
 });
+
+module.exports = app;
