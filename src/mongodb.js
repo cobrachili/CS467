@@ -11,9 +11,10 @@
 // Date 8/2/25
 // Using related documents in mongodob:
 // https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/mongoose
+
 const mongoose =require("mongoose")
 
-mongoose.connect("mongodb://localhost:27017/LoginSignUp")
+mongoose.connect("mongodb+srv://steve:testing123@cluster0.5jckiya.mongodb.net/application?retryWrites=true&w=majority&appName=Cluster0")
 .then(()=>{
    console.log("mongodb connected"); 
 })
