@@ -77,6 +77,13 @@
         <td>{{this.type}}</td>
         <td>{{this.level}}</td>
         <td>{{this.category}}</td>
+        <td>
+            <form action="/contacts/delete/{{this._id}}" method="post">
+                <button type="submit" class="btn btn-sm btn-outline-danger">
+                    Delete
+                </button>
+            </form>
+        </td>  
       </tr>
     {{else}}
       <tr><td>No skills added yet.</td></tr>
