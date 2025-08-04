@@ -13,7 +13,7 @@
 // https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/mongoose
 const mongoose =require("mongoose")
 
-mongoose.connect("mongodb+srv://steve:testing123@cluster0.5jckiya.mongodb.net/application?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect("mongodb://localhost:27017/LoginSignUp")
 .then(()=>{
    console.log("mongodb connected"); 
 })

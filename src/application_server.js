@@ -17,7 +17,7 @@ https://www.geeksforgeeks.org/node-js/node-js-crud-operations-using-mongoose-and
 // Database connection setup
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://steve:testing123@cluster0.5jckiya.mongodb.net/application?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect("mongodb+srv://steve:testing123@cluster0.5jckiya.mongodb.net/application?retryWrites=true&w=majority&appName=Cluster0")
 
 const db = mongoose.connection;
 
