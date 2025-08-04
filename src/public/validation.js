@@ -1,7 +1,7 @@
 // Date: 7/11/25
 // Adapted From:
 // https://www.youtube.com/watch?v=bVl5_UdcAy0
-// Incorporated errors and logic to check the form validation and usage of Incorrect as a css class for errors //
+// Incorporated errors and logic to check the form validation and usage of incorrect as a css class for errors //
 
 // Date: 7/12/25
 // Adapted From:
@@ -55,68 +55,68 @@ function getSignupFormErrors(firstname, lastname, email, password, repeatPasswor
     let errors = []
 
     // Remove visual errors if user successfully fixes their mistakes
-    firstname_input.parentElement.classList.remove('Incorrect');
-    lastname_input.parentElement.classList.remove('Incorrect');
-    email_input.parentElement.classList.remove('Incorrect');
-    password_input.parentElement.classList.remove('Incorrect');
-    repeat_password_input.parentElement.classList.remove('Incorrect');
+    firstname_input.parentElement.classList.remove('incorrect');
+    lastname_input.parentElement.classList.remove('incorrect');
+    email_input.parentElement.classList.remove('incorrect');
+    password_input.parentElement.classList.remove('incorrect');
+    repeat_password_input.parentElement.classList.remove('incorrect');
 
 
      // first name checks
     if (firstname === '' || firstname == null) {
         errors.push('First name is required');
-        firstname_input.parentElement.classList.add('Incorrect');
+        firstname_input.parentElement.classList.add('incorrect');
     }
     // last name checks
     if (lastname === '' || lastname == null) {
         errors.push('Last name is required');
-        lastname_input.parentElement.classList.add('Incorrect');
+        lastname_input.parentElement.classList.add('incorrect');
     }
      // email checks
     if (email === '' || email == null) {
         errors.push('Email is required');
-        email_input.parentElement.classList.add('Incorrect');
+        email_input.parentElement.classList.add('incorrect');
     }
 
     // password checks
     if (password === '' || password == null) {
         errors.push('Password is required');
-        password_input.parentElement.classList.add('Incorrect');
+        password_input.parentElement.classList.add('incorrect');
     } else {
         if (password.length < 8 || password.length > 20) {
             errors.push("Password must have at least 8 characters and less than 20 characters ");
-            password_input.parentElement.classList.add('Incorrect');
+            password_input.parentElement.classList.add('incorrect');
         }
 
         // Find a match for the string in symbols
         var symbols = /[~`!@#$%^&*()_\-+=]/;
         if (!symbols.test(password)) {
             errors.push("Password must contain at least one special symbol:(~`!@#$%^&*()_\-+=)");
-            password_input.parentElement.classList.add('Incorrect');
+            password_input.parentElement.classList.add('incorrect');
         }
          // Find a match for the string in lower case letters
         var lowerCaseLetters = /[a-z]/;
         if (!lowerCaseLetters.test(password)) {
             errors.push("Password must contain at least one lower case letter");
-            password_input.parentElement.classList.add('Incorrect');
+            password_input.parentElement.classList.add('incorrect');
         }
          // Find a match for the string in upper case letters
         var upperCaseLetters = /[A-Z]/;
         if (!upperCaseLetters.test(password)) {
             errors.push("Password must contain at least one upper case letter");
-            password_input.parentElement.classList.add('Incorrect');
+            password_input.parentElement.classList.add('incorrect');
         }
         // Find a match for the string in numbers
           var number = /[0-9]/;
         if (!number.test(password)) {
             errors.push("Password must contain at least one number");
-            password_input.parentElement.classList.add('Incorrect');
+            password_input.parentElement.classList.add('incorrect');
         }
 
         if (password !== repeatPassword) {
             errors.push('Password does not match repeated Password');
-            password_input.parentElement.classList.add('Incorrect');
-            repeat_password_input.parentElement.classList.add('Incorrect');
+            password_input.parentElement.classList.add('incorrect');
+            repeat_password_input.parentElement.classList.add('incorrect');
         }
     }
 
@@ -129,13 +129,13 @@ function getLoginFormErrors(email,password) {
 
     if (email === '' || email == null) {
         errors.push('Email is required');
-        email_input.parentElement.classList.add('Incorrect');
+        email_input.parentElement.classList.add('incorrect');
     }
 
     
     if (password === '' || password == null) {
         errors.push('Password is required');
-        password_input.parentElement.classList.add('Incorrect');
+        password_input.parentElement.classList.add('incorrect');
 }
     return errors;
 }

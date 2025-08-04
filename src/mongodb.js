@@ -9,7 +9,7 @@
 //Learned about schema type as well as incorporated some_id schema for user id.
 const mongoose =require("mongoose")
 
-mongoose.connect("mongodb+srv://steve:testing123@cluster0.5jckiya.mongodb.net/application?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect("mongodb://localhost:27017/LoginSignUp")
 .then(()=>{
    console.log("mongodb connected"); 
 })

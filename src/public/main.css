@@ -83,14 +83,14 @@ form label{
     background-color: white;
 }
 
-.Incorrect {
+.incorrect {
     border: 2px solid #f06272;
 }
 
-form div.Incorrect label {
+form div.incorrect label {
     background-color: #f06272;
 }
-form div.Incorrect input{
+form div.incorrect input{
     border-color: #f06272;
 }
 
