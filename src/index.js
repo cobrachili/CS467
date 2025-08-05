@@ -28,6 +28,19 @@
 // https://www.geeksforgeeks.org/mongodb/mongoose-document-model-create-api/\
 // Learned about using create for mongoose
 
+// Date: 8/1/25
+// Adapted from:
+// https://www.mongodb.com/docs/manual/aggregation/
+// Learned about aggregation operations in mongoDB
+// Adapted from:
+// https://www.geeksforgeeks.org/mongodb/aggregation-in-mongodb/
+// Learned how to use queries
+// Adapted from: https://www.mongodb.com/docs/manual/reference/method/db.collection.aggregate/
+// How to implement Aggregate Pipeline operations
+
+
+
+
 const express = require("express")
 const app=express()
 const path=require("path")
@@ -117,7 +130,7 @@ app.post('/delete/:id', (req, res) => {
     .catch(error => console.log('Unable to delete:', error))
 })
 
-// Generate stats
+// Generate skills stats
 app.get("/stats", async (req, res) => {
     try {
         //Generate total skills
