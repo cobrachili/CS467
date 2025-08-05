@@ -112,9 +112,44 @@ app.post("/skills", async (req, res) => {
 
 // Delete skills route
 app.post('/delete/:id', (req, res) => {
-  skill.findByIdAndDelete(req.params.id)
+  collection2.findByIdAndDelete(req.params.id)
     .then(data => res.redirect('/skills'))
     .catch(error => console.log('Unable to delete:', error))
+})
+
+// Generate stats
+app.get("/stats", async (req, res) => {
+    try {
+        //Generate total skills
+        const totalSkills = await collection2.countDocuments()
+
+        //Generate skills by category
+        const skillsByCategory = await collection2.aggregate([
+            { $group: { _id: "$category", count: { $sum: 1 } } },
+        ])
+
+        // Generate skills by level
+        const skillsByLevel = await collection2.aggregate([
+            { $group: { _id: "$level", count: { $sum: 1 } } },
+        ])
+
+        // Generate top 5 popular skills
+        const popularSkills = await collection2.aggregate([
+            { $group: { _id: "$type", count: { $sum: 1 } } },
+            { $sort: { count: -1 } },
+            { $limit: 5 },
+        ])
+
+        // Render stats page
+        res.render('stats', 
+            {totalSkills, 
+            skillsByCategory, 
+            skillsByLevel, 
+            popularSkills})
+
+    } catch (err) {
+        res.status(500).send("Error generating statistics.")
+    }
 })
 
 
