@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='/skill.css'>
+    <script type="text/javascript" src="validation.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Job Tracker</h1>
+        <nav>
+            <a href="/login">Login</a>
+            <a href="/applications">Applications</a>
+            <a href="/contacts">Contacts</a>
+            <a href="/skills">Skills</a>
+            <a href="/stats">Stats</a>
+        </nav>
+    </header>
+
+<h2>Skills Statistics</h2>
+
+<div id="total-skills">
+  Total Skills: {{totalSkills}}
+</div>
+
+<div id="skills-by-category">
+  <h3>Skills by Category</h3>
+  {{#each skillsByCategory}}
+    <p>{{_id}}: {{count}}</p>
+  {{/each}}
+</div>
+
+<div id="skills-by-level">
+  <h3>Skills by Level</h3>
+  {{#each skillsByLevel}}
+    <p>{{_id}}: {{count}}</p>
+  {{/each}}
+</div>
+
+<div id="popular-skills">
+  <h3>Most Popular Skills</h3>
+  {{#each popularSkills}}
+    <p>{{_id}}: {{count}}</p>
+  {{/each}}
+</div>

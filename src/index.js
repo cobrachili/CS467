@@ -28,6 +28,16 @@
 // https://www.geeksforgeeks.org/mongodb/mongoose-document-model-create-api/\
 // Learned about using create for mongoose
 
+// Date: 8/1/25
+// Adapted from:
+// https://www.mongodb.com/docs/manual/aggregation/
+// Learned about aggregation operations in mongoDB
+// Adapted from:
+// https://www.geeksforgeeks.org/mongodb/aggregation-in-mongodb/
+// Learned how to use queries
+// Adapted from: https://www.mongodb.com/docs/manual/reference/method/db.collection.aggregate/
+// How to implement Aggregate Pipeline operations
+
 const express = require("express")
 const app=express()
 const path=require("path")
@@ -109,6 +119,12 @@ app.post("/skills", async (req, res) => {
     res.redirect("/skills");
 });
 
+// Delete skills route
+app.post('/delete/:id', (req, res) => {
+  collection2.findByIdAndDelete(req.params.id)
+    .then(data => res.redirect('/skills'))
+    .catch(error => console.log('Unable to delete:', error))
+})
 
 // Display applications
 app.get("/applications", async (req, res) => {
@@ -134,6 +150,40 @@ await Application.create(data);
 res.redirect("/applications");
 });
 
+// Display skills stats
+app.get("/stats", async (req, res) => {
+    try {
+        // Count total skills
+        const totalSkills = await collection2.countDocuments()
+
+        // Generate skills by category
+        const skillsByCategory = await collection2.aggregate([
+            { $group: { _id: "$category", count: { $sum: 1 } } },
+        ])
+
+        // Generate skills by level
+        const skillsByLevel = await collection2.aggregate([
+            { $group: { _id: "$level", count: { $sum: 1 } } },
+        ])
+
+        // Generate top 5 popular skills
+        const popularSkills = await collection2.aggregate([
+            { $group: { _id: "$type", count: { $sum: 1 } } },
+            { $sort: { count: -1 } },
+            { $limit: 5 },
+        ])
+
+        // Render stats page
+        res.render('stats', 
+            {totalSkills, 
+            skillsByCategory, 
+            skillsByLevel, 
+            popularSkills})
+
+    } catch (err) {
+        res.status(500).send("Error generating statistics.")
+    }
+})
 
 app.listen(3131,() => {
     console.log("port connected")
