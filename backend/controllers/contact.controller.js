@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 
 // Get contact
 router.get('/createOrEdit', (req, res) => {
-    res.render("contacts/createOrEdit" )
+    res.render("/createOrEdit" )
 
     })
 
@@ -43,16 +43,12 @@ router.get('/createOrEdit/:id', (req,res) => {
 // Create new contact
 router.post('/createorEdit', (req, res) => {
                const newContact = new contact({
-            jobAppNum: req.body.jobAppNum,
             name: req.body.name,
             company: req.body.company,
             emailAddress: req.body.emailAddress,
             phoneNumber: req.body.phoneNumber,
         })
-        // Console logs are for debugging purposes
-        console.log("Received form data:")
-        console.log("Name:", contact.name)
-        console.log("Email:", contact.emailAddress)
+        
         const { _id } = req.body
         if (_id == "")
             newContact.save()
@@ -67,7 +63,7 @@ router.post('/createorEdit', (req, res) => {
 
 // Delete contact route
 router.post('/delete/:id', (req, res) => {
-  contactontact.findByIdAndDelete(req.params.id)
+  contact.findByIdAndDelete(req.params.id)
     .then(data => res.redirect('/contacts'))
     .catch(error => console.log('Unable to delete:', error))
 })

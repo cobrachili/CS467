@@ -14,13 +14,16 @@
 
 const mongoose =require("mongoose")
 
-mongoose.connect("mongodb+srv://steve:testing123@cluster0.5jckiya.mongodb.net/application?retryWrites=true&w=majority&appName=Cluster0")
-.then(()=>{
-   console.log("mongodb connected"); 
-})
-.catch(() =>{
-    console.log("failed to connect");
-})
+mongoose
+    .connect(
+        "mongodb+srv://kevin123:testing123@skills.tqi6amb.mongodb.net/?retryWrites=true&w=majority&appName=skills"
+    )
+    .then(() => {
+        console.log("mongodb connected")
+    })
+    .catch(() => {
+        console.log("failed to connect")
+    })
 const SignUpSchema= new mongoose.Schema({
      firstname:{
         type:String,
@@ -73,8 +76,8 @@ const skillSchema= new mongoose.Schema({
 })
 const collection2=new mongoose.model("collection2",skillSchema)
 
-
-const contactSchema = mongoose.Schema(
+// Contacts Schema
+const contactSchema = new mongoose.Schema(
     {
         userId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -109,7 +112,7 @@ const contactSchema = mongoose.Schema(
         timestamps: true, // createdAt, updatedAt
     }
 )
-const contact = mongoose.model("contact", contactSchema)
+const contact = new mongoose.model("contact", contactSchema)
 
 // Applications Schema
 const applicationSchema = new mongoose.Schema({
@@ -142,4 +145,4 @@ const applicationSchema = new mongoose.Schema({
 
 const Application=new mongoose.model("applications",applicationSchema)
 
-module.exports = { collection1, collection2, Application };
+module.exports = { collection1, collection2, Application, contact };

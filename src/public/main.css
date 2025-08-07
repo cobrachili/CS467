@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
 :root{
---accent-color:rgb(221, 125, 197);
+--accent-color:rgb(14, 8, 12);
 --base-color: rgb(84, 74, 224);
---text-color: #2e2e2e; 
---input-color: white; 
+--text-color: 	rgb(19, 13, 18);
+--input-color: rgb(182, 179, 211); 
 
 }
 *{
@@ -24,100 +24,39 @@ body{
     overflow: hidden;
 }
 
-.wrapper{
-    box-sizing: border-box;
-    background-color:white;
-    height: 100vh;
-    width: max(40%,600px);
-    padding: 10px;
-    border-radius: 0 20px 20px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.description-box {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 600px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
-h1{
-    font-size: 3rem;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-form{
-    width: min(400px, 100%);
-    margin-top: 20px;
-    margin-bottom: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-form label{
-    background-color: var(--accent-color);
-    fill: var(--base-color);
-    border-radius: 10px 0 0 10px;
+table {
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
 }
 
-
-
-.input-group {
-    display: flex;
-    width: 90%;
-    border: 2px solid var(--base-color);
-    border-radius: 10px;
-    background-color: white;
-}
-
-.input-group label {
-    background-color: var(--accent-color);
-    padding: 9px;
-    display: flex;
-    align-items: center;
-  
-}
-
-.input-group input {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    font-size: 20px;
-    background-color: white;
-}
-
-.incorrect {
-    border: 2px solid #f06272;
-}
-
-form div.incorrect label {
-    background-color: #f06272;
-}
-form div.incorrect input{
-    border-color: #f06272;
-}
-
-label.col-form-label {
-    text-align: left;
-    color: blue;
-    background-color: lightyellow;
-    padding-bottom: 5%;
-}
-
-input.form-control {
-    padding-top: 5%;
-}
-.modal-content {
-    text-align: left;
-}
-div.modal-content {
-    display: flexbox;
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
+  border: 1px solid;
+  margin-left: auto;
+  margin-right: auto;
 }
-th, td {
-  padding-top: 10px;
-  padding-bottom: 20px;
-  padding-left: 30px;
-  padding-right: 40px;
+
+.table-centered {
+  margin: 0 auto;
+  width: 60%; 
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }

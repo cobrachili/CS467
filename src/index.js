@@ -43,7 +43,7 @@ const app=express()
 const path=require("path")
 const hbs= require("hbs")
 const session = require('express-session')
-const { collection1, collection2, Application} = require("./mongodb")
+const { collection1, collection2, Application, contact} = require("./mongodb")
 
 app.use(session({
   secret: 'your-secret-key',
@@ -150,6 +150,7 @@ await Application.create(data);
 res.redirect("/applications");
 });
 
+
 // Display skills stats
 app.get("/stats", async (req, res) => {
     try {
@@ -185,6 +186,63 @@ app.get("/stats", async (req, res) => {
     }
 })
 
+// Get all contacts route
+app.get('/contacts', (req, res) => {
+    contact.find({userId: req.session.user._id })
+        .then(data => {
+            res.render('contacts', {contacts: data, layout:false })
+
+        })
+        .catch (error =>
+            console.log("Error in retrieving contacts:", error.message))
+    })
+
+
+// Get contact
+app.get('/createOrEdit', (req, res) => {
+    res.render("createOrEdit" )
+    })
+
+// Read contact
+app.get('/createOrEdit/:id', (req,res) => {
+
+    contact.findById(req.params.id)
+        .then(data => res.render('createOredit',{ contact :data}))
+        
+        .catch (error => 
+            console.log("Error in retrieving contact:", error.message))
+           
+    })
+
+
+// Create new contact
+app.post('/createorEdit', (req, res) => {
+            const newContact = new contact({
+                userId: req.session.user._id,
+                name: req.body.name,
+                company: req.body.company,
+                emailAddress: req.body.emailAddress,
+                phoneNumber: req.body.phoneNumber,
+            })
+        
+        const { _id } = req.body
+        if (_id == "")
+            newContact.save()
+         .then(data => res.redirect("/contacts"))
+         .catch(error => console.log("Server Error", error))
+        else
+            contact.findByIdAndUpdate(_id, contact)
+            .then( data => res.redirect("/contacts"))
+            .catch(error =>console.log("Server Error", error))
+        })
+       
+
+// Delete contact route
+app.post('/contact/delete/:id', (req, res) => {
+  contact.findByIdAndDelete(req.params.id)
+    .then(data => res.redirect('/contacts'))
+    .catch(error => console.log('Unable to delete:', error))
+})
 app.listen(3131,() => {
     console.log("port connected")
 });
