@@ -53,7 +53,32 @@ const session = require('express-session')
 // https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/mongoose
 
 const mongoose =require("mongoose")
+const mongoURI = process.env.MONGO_URI;
+const { MongoClient, ServerApiVersion } = require("mongodb");
+//mongo URI
+const client = new MongoClient(mongoURI, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    },
+  });
 
+const run = async () => {
+try{
+    await client.connect();
+
+     await client.db("admin").command({ ping: 1 });
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
+}
+finally{
+
+}
+}
+
+run().catch(error => console.log)
 
 const SignUpSchema= new mongoose.Schema({
      firstname:{
