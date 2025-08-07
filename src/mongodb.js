@@ -16,7 +16,7 @@ const mongoose =require("mongoose")
 
 mongoose
     .connect(
-        "mongodb+srv://kevin123:testing123@skills.tqi6amb.mongodb.net/?retryWrites=true&w=majority&appName=skills"
+        "mongodb+srv://steve:testing123@cluster0.5jckiya.mongodb.net/application?retryWrites=true&w=majority&appName=Cluster0"
     )
     .then(() => {
         console.log("mongodb connected")
