@@ -1,19 +1,24 @@
-<!-- // Date: 7/13/25
-// Adapted From:
-// https://getbootstrap.com/docs/5.3/components/modal/#how-it-works
-// How to create a modal  !-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    
+    {{!-- <link rel='stylesheet' type='text/css' media='screen' href='skill.css'> --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</head>
 
-<form action="/contacts/createOrEdit" method="POST" >
+<form action="/createOrEdit" method="POST" >
 <input type="hidden" name="_id" value="{{contact._id}}">
 
         <h1 class="modal-title fs-5" id="contactModalLabel">Enter Contact Details</h1>
-      {{!-- </div> --}}
+    
       <div class="modal-body">
         <form>
-          <div class="form-floating mb-3">
-            <label for="jobAppNum" class="col-form-label">Job app number:</label>
-            <input type="number" class="form-control" name="jobAppNum" placeholder="1" min="1" required value="{{contact.jobAppNum}}">
-          </div>
+        
           <div class="form-floating  mb-3">
             <label for="name" class="col-form-label">Contact name:</label>
             <input type="text" class="form-control" name="name" placeholder="Mike Shinoda" required value="{{contact.name}}">
