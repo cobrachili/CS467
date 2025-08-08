@@ -38,7 +38,11 @@ const path=require("path")
 const hbs= require("hbs")
 const session = require('express-session')
 const { collection1, collection2, Application, connectToDatabase} = require("../DB/db.js")
-connectToDatabase();
+
+app.use(async (req, res, next) => {
+  try { await connectToDatabase(); next(); }
+  catch (e) { next(e); }
+});
 
 app.use(session({
   secret: 'your-secret-key',
