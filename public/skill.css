@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
+:root{
+--accent-color:rgb(14, 8, 12);
+--base-color: rgb(84, 74, 224);
+--text-color: 	rgb(19, 13, 18);
+--input-color: rgb(182, 179, 211); 
+
+}
+*{
+margin: 0;
+padding: 0;
+}
+html{
+    font-family: Tiktok Sans;
+    font-size:12pt;
+    color: var(--text-color);
+    text-align: center; 
+}
+body{
+    min-height: 50vh;
+    background-image:url(gray.jpg);
+    background-size: cover;
+    background-position: right;
+    overflow: hidden;
+}
+
+.description-box {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 600px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+table {
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+
+}
+
+
