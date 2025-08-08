@@ -53,32 +53,38 @@ const session = require('express-session')
 // https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/mongoose
 
 const mongoose =require("mongoose")
-const mongoURI = process.env.MONGO_URI;
-const { MongoClient, ServerApiVersion } = require("mongodb");
-//mongo URI
-const client = new MongoClient(mongoURI, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    },
-  });
-
-const run = async () => {
-try{
-    await client.connect();
-
-     await client.db("admin").command({ ping: 1 });
-    console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
-    );
+import { MongoClient } from "mongodb";
+const uri = process.env.NEXT_ATLAS_URI;
+const options = {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+};
+let mongoClient = null;
+let database = null;
+if (!process.env.NEXT_ATLAS_URI) {
+    throw new Error('Please add your Mongo URI to .env.local')
 }
-finally{
-
+export async function connectToDatabase() {
+    try {
+        if (mongoClient && database) {
+            return { mongoClient, database };
+        }
+        if (process.env.NODE_ENV === "development") {
+            if (!global._mongoClient) {
+                mongoClient = await (new MongoClient(uri, options)).connect();
+                global._mongoClient = mongoClient;
+            } else {
+                mongoClient = global._mongoClient;
+            }
+        } else {
+            mongoClient = await (new MongoClient(uri, options)).connect();
+        }
+        database = await mongoClient.db(process.env.NEXT_ATLAS_DATABASE);
+        return { mongoClient, database };
+    } catch (e) {
+        console.error(e);
+    }
 }
-}
-
-run().catch(error => console.log)
 
 const SignUpSchema= new mongoose.Schema({
      firstname:{
