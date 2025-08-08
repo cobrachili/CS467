@@ -53,7 +53,7 @@ app.use(session({
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json())
 app.set("view engine","hbs")
-app.set("views")
+app.set("views", path.join(process.cwd(), "views"));
 app.use(express.urlencoded({extended:false}))
 
 app.get("/",(req,res) => {
