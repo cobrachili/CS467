@@ -37,8 +37,8 @@ const app=express()
 const path=require("path")
 const hbs= require("hbs")
 const session = require('express-session')
-const { collection1, collection2, Application, connectToMongoDB} = require("../DB/db.js")
-connectToMongoDB();
+const { collection1, collection2, Application, connectToDatabase} = require("../DB/db.js")
+await connectToDatabase();
 
 app.use(session({
   secret: 'your-secret-key',

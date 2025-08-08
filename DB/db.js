@@ -15,15 +15,24 @@
 
 const mongoose = require("mongoose");
 
-const connectToMongoDB = () => {
-  try {
-    mongoose.connect(process.env.MONGODB_URI).then(() => {
-      console.log("MongoDB is connected!");
-    });
-  } catch (error) {
-    console.log(error.message);
+let cached = global.mongoose;
+ 
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+ 
+async function connectToDatabase() {
+  if (cached.conn) return cached.conn;
+ 
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGO_URI, {
+      bufferCommands: false,
+    }).then(m => m);
   }
-};
+ 
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
 
 
 
@@ -148,4 +157,4 @@ const applicationSchema = new mongoose.Schema({
 
 const Application=new mongoose.model("applications",applicationSchema)
 
-module.exports = { collection1, collection2, Application, connectToMongoDB };
+module.exports = { collection1, collection2, Application, connectToDatabase };
