@@ -37,7 +37,9 @@ const app=express()
 const path=require("path")
 const hbs= require("hbs")
 const session = require('express-session')
-const { collection1, collection2, Application, contact} = require("./mongodb")
+const { collection1, collection2, Application, connectToDatabase} = require("../DB/db.js")
+
+connectToDatabase();
 
 app.use(session({
   secret: 'your-secret-key',
@@ -48,7 +50,7 @@ app.use(session({
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json())
 app.set("view engine","hbs")
-app.set("views")
+app.set("views", path.join(process.cwd(), "views"));
 app.use(express.urlencoded({extended:false}))
 
 app.get("/",(req,res) => {
@@ -275,8 +277,6 @@ app.post('/contact/delete/:id', (req, res) => {
 })
 
 
-app.listen(3000,() => {
-    console.log("port connected")
-});
+
 
 module.exports = app;
