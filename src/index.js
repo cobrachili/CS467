@@ -28,12 +28,22 @@
 // https://www.geeksforgeeks.org/mongodb/mongoose-document-model-create-api/\
 // Learned about using create for mongoose
 
+// Date: 8/1/25
+// Adapted from:
+// https://www.mongodb.com/docs/manual/aggregation/
+// Learned about aggregation operations in mongoDB
+// Adapted from:
+// https://www.geeksforgeeks.org/mongodb/aggregation-in-mongodb/
+// Learned how to use queries
+// Adapted from: https://www.mongodb.com/docs/manual/reference/method/db.collection.aggregate/
+// How to implement Aggregate Pipeline operations
+
 const express = require("express")
 const app=express()
 const path=require("path")
 const hbs= require("hbs")
 const session = require('express-session')
-const { collection1, collection2, Application} = require("./mongodb")
+const { collection1, collection2, Application, contact} = require("./mongodb")
 
 app.use(session({
   secret: 'your-secret-key',
@@ -109,6 +119,12 @@ app.post("/skills", async (req, res) => {
     res.redirect("/skills");
 });
 
+// Delete skills route
+app.post('/delete/:id', (req, res) => {
+  collection2.findByIdAndDelete(req.params.id)
+    .then(data => res.redirect('/skills'))
+    .catch(error => console.log('Unable to delete:', error))
+})
 
 // Display applications
 app.get("/applications", async (req, res) => {
@@ -133,6 +149,142 @@ const data = {
 await Application.create(data);
 res.redirect("/applications");
 });
+
+
+// Display skills stats
+app.get("/stats", async (req, res) => {
+    try {
+        // Count total skills
+        const totalSkills = await collection2.countDocuments()
+
+        // Generate skills by category
+        const skillsByCategory = await collection2.aggregate([
+            { $group: { _id: "$category", count: { $sum: 1 } } },
+        ])
+
+        // Generate skills by level
+        const skillsByLevel = await collection2.aggregate([
+            { $group: { _id: "$level", count: { $sum: 1 } } },
+        ])
+
+        // Generate top 5 popular skills
+        const popularSkills = await collection2.aggregate([
+            { $group: { _id: "$type", count: { $sum: 1 } } },
+            { $sort: { count: -1 } },
+            { $limit: 5 },
+        ])
+
+        // Render stats page
+        res.render('stats', 
+            {totalSkills, 
+            skillsByCategory, 
+            skillsByLevel, 
+            popularSkills})
+
+    } catch (err) {
+        res.status(500).send("Error generating statistics.")
+    }
+})
+
+// Get all contacts route
+app.get('/contacts', (req, res) => {
+    contact
+        .find({ userId: req.session.user._id })
+        .then(data => {
+            res.render("contacts", { contacts: data, layout: false })
+        })
+        .catch(
+            error =>{
+                console.error("Error in retrieving contacts", error)
+                res.status(500).json({
+            message:"Failed to retrieve contacts. Please try again.",
+            error: error.message,
+
+    })
+})
+})
+
+
+// Add a contact page
+app.get('/createOrEdit', (req, res) => {
+    res.render("createOrEdit" )
+    })
+
+// Read contact
+app.get('/createOrEdit/:id', (req,res) => {
+
+    contact
+        .findById(req.params.id)
+        .then(data => res.render("createOrEdit", { contact: data }))
+        .catch(error =>
+                {console.error("Error in retrieving contact", error)
+                res.status(500).json({
+            message:"Failed to retrieve contact. Please try again.",
+            error: error.message,
+    })
+    })
+})
+
+
+// Create new contact
+app.post("/createorEdit", (req, res) => {
+    const newContact = new contact({
+        userId: req.session.user._id,
+        name: req.body.name,
+        company: req.body.company,
+        emailAddress: req.body.emailAddress,
+        phoneNumber: req.body.phoneNumber,
+    })
+
+    const { _id } = req.body
+
+    // If _id is empty or not provided, create a new contact
+    if (!_id) {
+        newContact
+            .save()
+            .then(data => res.redirect("/contacts"))
+            .catch(error => {
+                console.error("Unable to save contact", error)
+                res.status(500).json({
+                    message:"Failed to save new contact. Please try again.",
+                    error: error.message,
+                })
+            })
+    } else {
+        // Update an existing contact by finding _id and passing the updated fields
+        contact
+            .findByIdAndUpdate(
+                _id,
+                {
+                    name: req.body.name,
+                    company: req.body.company,
+                    emailAddress: req.body.emailAddress,
+                    phoneNumber: req.body.phoneNumber,
+                },
+                { new: true }
+            ) // Returns the updated contact
+            .then(data => res.redirect("/contacts"))
+            .catch(error => {
+                console.error("Unable to update", error)
+                res.status(500).json({
+                    message:"Failed to update contact. Please try again.",
+                    error: error.message,
+                })
+            })
+    }
+})
+
+// Delete contact route
+app.post('/contact/delete/:id', (req, res) => {
+  contact.findByIdAndDelete(req.params.id)
+    .then(data => res.redirect("/contacts"))
+    .catch(error => {console.error("Server Error", error)
+    res.status(500).json({
+            message:"Failed to delete contact. Please try again.",
+            error: error.message,
+    })
+    })
+})
 
 
 app.listen(3131,() => {

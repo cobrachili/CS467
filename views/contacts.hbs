@@ -25,12 +25,11 @@ How to use express handlebar to render pages !-->
 <header>
         <h1>Job Tracker</h1>
         <nav>
-            <a href="home.html">Home</a>
-            <a href="index.html">Login</a>
-            <a href="applications.html">Applications</a>
-            <a href="profile.html">Profile</a>
-            <a href="contacts.html">Contacts</a>
-            <a href="skills.html">Skills</a>
+            <a href="/login">Login</a>
+            <a href="/applications">Applications</a>
+            <a href="/contacts">Contacts</a>
+            <a href="/skills">Skills</a>
+            <a href="/stats">Stats</a>
         </nav>
     </header>
 <main>
@@ -41,12 +40,12 @@ How to use express handlebar to render pages !-->
             <article>
 
               <!-- Button trigger modal -->
-              <div class="float-end">
-            <a href="/contacts/createOrEdit" class="btn btn-primary">Add Contact </a>
+              <div class="col-md-6 mx-auto">
+            <a href="createOrEdit" class="btn btn-primary">Add Contact </a>
+            </div>
             <!-- Modal -->
 
-<div id="modalArea"></div>
-<form action="/contacts/createOrEdit" method ="post">
+<form action="/createOrEdit" method ="post">
 <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -56,10 +55,6 @@ How to use express handlebar to render pages !-->
       </div>
       <div class="modal-body">
         <form>
-          <div class="pb-3">
-            <label for="jobAppNumber" class="col-form-label">Job app number:</label>
-            <input type="number" class="form-control" id="job-app-num" placeholder="1" min="1">
-          </div>
           <div class="pb-3">
             <label for="contact-name" class="col-form-label">Contact name:</label>
             <input type="text" class="form-control" id="contact-name" placeholder="Mike Shinoda">
@@ -86,30 +81,28 @@ How to use express handlebar to render pages !-->
     </div>
   </div>
 </div>
-
-                <table class="table">
+{{!-- <div class="d-flex justify-content-center"> --}}
+                <table id="contacts-table">
                     <thead>
                         <tr>                       
-                            <th scope="col">Job Application</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Company</th>
-                            <th scope="col">Phone Number</th>
-                            <th scope="col">Email Address</th>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Email Address</th>
+                            <th>Phone Number</th>
                         </tr>
                     </thead>
                     <tbody >
                     {{#each contacts}}
                     
                     <tr>
-                        <td scope="row">{{this.jobAppNum}}</td>
-                        <td scope="row">{{this.name}}</td>
-                        <td scope="row">{{this.company}}</td>
-                        <td scope="row">{{this.phoneNumber}}</td>
-                        <td scope="row">{{this.emailAddress}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.company}}</td>
+                        <td>{{this.phoneNumber}}</td>
+                        <td>{{this.emailAddress}}</td>
             
                         <td>
-                            <form action="/contacts/delete/{{this._id}}" method="post">
-                                <a href="/contacts/createOrEdit/{{this._id}}" class="btn btn-sm btn-link">Edit</a>
+                            <form action="/contact/delete/{{this._id}}" method="POST">
+                                <a href="createOrEdit/{{this._id}}" class="btn btn-sm btn-link">Edit</a>
                                 <button type="submit" class="btn btn-sm btn-outline-danger">
                                     Delete
                                 </button>
@@ -120,6 +113,7 @@ How to use express handlebar to render pages !-->
                 </tbody>
 
                 </table> 
+                
 
             </article>
           
