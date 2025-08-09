@@ -156,6 +156,7 @@ app.post('/applications/delete/:id', (req, res) => {
 app.get("/stats", async (req, res) => {
 
     const data = req.session.user._id;
+    
 
     try {
         // Count total skills
@@ -169,14 +170,16 @@ app.get("/stats", async (req, res) => {
 
         // Generate skills by level
         const skillsByLevel = await collection2.aggregate([
-            { $group: { _id: "$level", count: { $sum: 1 } } },
+            {$match: {data}},
+            { $group: { _id: "$level", count: { $sum: 1 } } }
         ])
 
         // Generate top 5 popular skills
         const popularSkills = await collection2.aggregate([
+            {$match: {data}},
             { $group: { _id: "$type", count: { $sum: 1 } } },
             { $sort: { count: -1 } },
-            { $limit: 5 },
+            { $limit: 5 }
         ])
 
         // Render stats page
