@@ -142,7 +142,7 @@ res.redirect("/applications");
 
 // Delete application route
 app.post('/applications/delete/:id', (req, res) => {
-  contact.findByIdAndDelete(req.params.id)
+  Application.findByIdAndDelete(req.params.id)
     .then(data => res.redirect("/applications"))
     .catch(error => {console.error("Server Error", error)
     res.status(500).json({
