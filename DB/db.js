@@ -12,6 +12,9 @@
 // Using related documents in mongodob:
 // https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/mongoose
 
+// Date 8/7/25
+// Connecting mongodb to vercel with cache
+// https://dev.to/arunangshu_das/10-common-mongoose-mistakes-that-break-your-mongodb-app-3780
 
 const mongoose = require("mongoose");
 
