@@ -160,4 +160,4 @@ const applicationSchema = new mongoose.Schema({
 
 const Application=new mongoose.model("applications",applicationSchema)
 
-module.exports = { collection1, collection2, Application, connectToDatabase };
+module.exports = { collection1, collection2, Application, contact, connectToDatabase };

@@ -37,7 +37,7 @@ const app=express()
 const path=require("path")
 const hbs= require("hbs")
 const session = require('express-session')
-const { collection1, collection2, Application, connectToDatabase} = require("../DB/db.js")
+const { collection1, collection2, Application, contact, connectToDatabase} = require("../DB/db.js")
 
 connectToDatabase();
 
