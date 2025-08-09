@@ -163,7 +163,8 @@ app.get("/stats", async (req, res) => {
 
         // Generate skills by category
         const skillsByCategory = await collection2.aggregate([
-            { $group: { _id: "$category", count: { $sum: 1 } } },
+            {$match: data},
+            { $group: { _id: "$category", count: { $sum: 1 } } }
         ])
 
         // Generate skills by level
