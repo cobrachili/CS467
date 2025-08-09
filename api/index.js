@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json())
 app.set("view engine","hbs")
 app.set("views", path.join(process.cwd(), "views"));
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({extended:true}))
 
 app.get("/",(req,res) => {
     res.render("login")
@@ -140,6 +140,17 @@ await Application.create(data);
 res.redirect("/applications");
 });
 
+// Delete application route
+app.post('/applications/delete/:id', (req, res) => {
+  contact.findByIdAndDelete(req.params.id)
+    .then(data => res.redirect("/applications"))
+    .catch(error => {console.error("Server Error", error)
+    res.status(500).json({
+            message:"Failed to delete application. Please try again.",
+            error: error.message,
+    })
+    })
+})
 
 // Display skills stats
 app.get("/stats", async (req, res) => {
