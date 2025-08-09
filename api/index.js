@@ -154,10 +154,12 @@ app.post('/applications/delete/:id', (req, res) => {
 
 // Display skills stats
 app.get("/stats", async (req, res) => {
-    
+
+    const data = req.session.user._id;
+
     try {
         // Count total skills
-        const totalSkills = await collection2.countDocuments(req.session.user._id)
+        const totalSkills = await collection2.countDocuments({data})
 
         // Generate skills by category
         const skillsByCategory = await collection2.aggregate([
