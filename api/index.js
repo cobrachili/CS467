@@ -115,6 +115,12 @@ app.post("/skills", async (req, res) => {
     res.redirect("/skills");
 });
 
+// Delete skills route
+app.post('/delete/:id', (req, res) => {
+  collection2.findByIdAndDelete(req.params.id)
+    .then(data => res.redirect('/skills'))
+    .catch(error => console.log('Unable to delete:', error))
+})
 
 // Display applications
 app.get("/applications", async (req, res) => {
