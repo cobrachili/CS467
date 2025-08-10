@@ -153,11 +153,11 @@ const applicationSchema = new mongoose.Schema({
         type:String,
         required:false
     },
-    skills:{
+    skills:[{
         type:mongoose.Schema.Types.ObjectId, ref: "collection2",
-    },
+    }],
 })
 
 const Application=new mongoose.model("applications",applicationSchema)
 
-module.exports = { collection1, collection2, Application, connectToDatabase };
+module.exports = { collection1, collection2, Application, contact, connectToDatabase };

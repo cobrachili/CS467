@@ -32,12 +32,22 @@
 // Using vercel with express
 // https://vercel.com/guides/using-express-with-vercel
 
+// Date 8/9/2025
+// Using countdocuments to search a collection 
+// https://www.mongodb.com/docs/manual/reference/method/db.collection.countDocuments/
+
+// Date 8/9/2025
+// How to get mongoose to aggregate using objectId values
+// https://stackoverflow.com/questions/36193289/moongoose-aggregate-match-does-not-match-ids
+
+
+const mongoose = require('mongoose');
 const express = require("express")
 const app=express()
 const path=require("path")
 const hbs= require("hbs")
 const session = require('express-session')
-const { collection1, collection2, Application, connectToDatabase} = require("../DB/db.js")
+const { collection1, collection2, Application, contact, connectToDatabase} = require("../DB/db.js")
 
 connectToDatabase();
 
@@ -51,7 +61,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json())
 app.set("view engine","hbs")
 app.set("views", path.join(process.cwd(), "views"));
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({extended:true}))
 
 app.get("/",(req,res) => {
     res.render("login")
@@ -140,28 +150,45 @@ await Application.create(data);
 res.redirect("/applications");
 });
 
+// Delete application route
+app.post('/applications/delete/:id', (req, res) => {
+  Application.findByIdAndDelete(req.params.id)
+    .then(data => res.redirect("/applications"))
+    .catch(error => {console.error("Server Error", error)
+    res.status(500).json({
+            message:"Failed to delete application. Please try again.",
+            error: error.message,
+    })
+    })
+})
 
 // Display skills stats
 app.get("/stats", async (req, res) => {
+
+    const userid = req.session.user._id;
+    
     try {
         // Count total skills
-        const totalSkills = await collection2.countDocuments()
+        const totalSkills = await collection2.countDocuments({userId: userid})
 
         // Generate skills by category
         const skillsByCategory = await collection2.aggregate([
-            { $group: { _id: "$category", count: { $sum: 1 } } },
+            {$match: {userId: new mongoose.Types.ObjectId(userid)}},
+            { $group: { _id: "$category", count: { $sum: 1 } } }
         ])
 
         // Generate skills by level
         const skillsByLevel = await collection2.aggregate([
-            { $group: { _id: "$level", count: { $sum: 1 } } },
+            {$match: {userId: new mongoose.Types.ObjectId(userid)}},
+            { $group: { _id: "$level", count: { $sum: 1 } } }
         ])
 
         // Generate top 5 popular skills
         const popularSkills = await collection2.aggregate([
+            {$match: {userId: new mongoose.Types.ObjectId(userid)}},
             { $group: { _id: "$type", count: { $sum: 1 } } },
             { $sort: { count: -1 } },
-            { $limit: 5 },
+            { $limit: 5 }
         ])
 
         // Render stats page
@@ -169,7 +196,8 @@ app.get("/stats", async (req, res) => {
             {totalSkills, 
             skillsByCategory, 
             skillsByLevel, 
-            popularSkills})
+            popularSkills
+        })
 
     } catch (err) {
         res.status(500).send("Error generating statistics.")
