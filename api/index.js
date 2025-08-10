@@ -155,7 +155,7 @@ app.post('/applications/delete/:id', (req, res) => {
 // Display skills stats
 app.get("/stats", async (req, res) => {
 
-    const user = req.session.user;
+    const user = req.session.user._id;
     const userid = user._Id
     
 
