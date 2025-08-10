@@ -163,19 +163,19 @@ app.get("/stats", async (req, res) => {
 
         // Generate skills by category
         const skillsByCategory = await collection2.aggregate([
-            {$match: {userId: userid}},
+            {$match: {userId: mongoose.Types.ObjectId(userid)}},
             { $group: { _id: "$category", count: { $sum: 1 } } }
         ])
 
         // Generate skills by level
         const skillsByLevel = await collection2.aggregate([
-            {$match: {userId: userid}},
+            {$match: {userId: mongoose.Types.ObjectId(userid)}},
             { $group: { _id: "$level", count: { $sum: 1 } } }
         ])
 
         // Generate top 5 popular skills
         const popularSkills = await collection2.aggregate([
-            {$match: {userId: userid}},
+            {$match: {userId: mongoose.Types.ObjectId(userid)}},
             { $group: { _id: "$type", count: { $sum: 1 } } },
             { $sort: { count: -1 } },
             { $limit: 5 }
