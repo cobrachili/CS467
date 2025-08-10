@@ -32,6 +32,7 @@
 // Using vercel with express
 // https://vercel.com/guides/using-express-with-vercel
 
+const mongoose = require('mongoose');
 const express = require("express")
 const app=express()
 const path=require("path")
