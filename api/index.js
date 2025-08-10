@@ -161,7 +161,7 @@ app.get("/stats", async (req, res) => {
 
     try {
         // Count total skills
-        const totalSkills = await collection2.countDocuments({userid})
+        const totalSkills = await collection2.countDocuments({user: userid})
 
         // Generate skills by category
         const skillsByCategory = await collection2.aggregate([
