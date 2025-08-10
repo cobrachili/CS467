@@ -32,6 +32,15 @@
 // Using vercel with express
 // https://vercel.com/guides/using-express-with-vercel
 
+// Date 8/9/2025
+// Using countdocuments to search a collection 
+// https://www.mongodb.com/docs/manual/reference/method/db.collection.countDocuments/
+
+// Date 8/9/2025
+// How to get mongoose to aggregate using objectId values
+// https://stackoverflow.com/questions/36193289/moongoose-aggregate-match-does-not-match-ids
+
+
 const mongoose = require('mongoose');
 const express = require("express")
 const app=express()
