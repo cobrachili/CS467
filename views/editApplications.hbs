@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='/skill.css'>
+    <script></script>
+</head>
+<body>
+<h1>Edit Application</h1>
+
+<form action="/applications/edit/{{application._id}}" method="post">
+
+    <label>Company: <input type="text" name="company" value="{{application.company}}" required></label>
+    <label>Type: <input type="text" name="type" value="{{application.type}}" required></label>
+    <label>Date: <input type="text" name="date" value="{{application.date}}" ></label>
+    <label>Status: <input type="text" name="status" value="{{application.status}}" required></label>
+    <button type="submit">Submit</button>
+    
+</form>
+</body>

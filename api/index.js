@@ -150,6 +150,46 @@ await Application.create(data);
 res.redirect("/applications");
 });
 
+// Populate edit application page
+app.get('/applications/edit/:id', (req,res) => {
+
+    Application
+        .findById(req.params.id)
+        .then(data => res.render("editApplications", { application: data }))
+        .catch(error =>
+                {console.error("Error in retrieving application", error)
+                res.status(500).json({
+            message:"Failed to retrieve application. Please try again.",
+            error: error.message,
+    })
+    })
+})
+
+// update application route 
+app.post("/applications/edit/:id", (req, res) => {
+    Application
+            .findByIdAndUpdate(
+                req.params.id,
+                {
+                    userId: req.session.user._id,
+                    company: req.body.company,
+                    type: req.body.type,
+                    date: req.body.date,
+                    status: req.body.status,
+                },
+                { new: true }
+            ) // Returns the updated application
+            .then(data => res.redirect("/applications"))
+            .catch(error => {
+                console.error("Unable to update", error)
+                res.status(500).json({
+                    message:"Failed to update application. Please try again.",
+                    error: error.message,
+                })
+            })
+})
+
+
 // Delete application route
 app.post('/applications/delete/:id', (req, res) => {
   Application.findByIdAndDelete(req.params.id)

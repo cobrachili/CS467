@@ -131,7 +131,7 @@ const applicationSchema = new mongoose.Schema({
         required:false
     },
     date:{
-        type: Date,
+        type: String,
         required:false
     },
     status:{
