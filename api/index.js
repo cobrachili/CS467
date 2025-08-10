@@ -156,7 +156,7 @@ app.post('/applications/delete/:id', (req, res) => {
 app.get("/stats", async (req, res) => {
 
     const user = req.session.user;
-    const userid = user._id
+    const userid = user._Id
     
 
     try {
