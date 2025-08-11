@@ -17,7 +17,7 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Tracker</title>
     <link rel='stylesheet' type='text/css' media='screen' href='/skill.css'>
-    <script type="text/javascript" src="validation.js" defer></script>
+    <script></script>
 </head>
 <body>
     <header>
@@ -43,6 +43,7 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
             <th>Type</th>
             <th>Date Submitted</th>
             <th>Status</th>
+            <th>Edit</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -53,6 +54,8 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
             <td>{{this.type}}</td>
             <td>{{this.date}}</td>
             <td>{{this.status}}</td>
+            <td><a href="/applications/edit/{{this._id}}">
+            <button>Edit</button></a></td>
             <td><form action="/applications/delete/{{this._id}}" method="post">
             <button type="submit">Delete</button>
             </form></td>
@@ -74,7 +77,7 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
     </select>
 
     <label for="input-date">Date Submitted: </label>
-    <input type="date" name="date" id="input-date">
+    <input type="text" name="date" id="input-date">
 
     <label for="input-status">Status: </label>
     <input type="text" name="status" id="input-status">

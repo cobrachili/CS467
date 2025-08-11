@@ -13,6 +13,10 @@
 //https://www.geeksforgeeks.org/web-tech/express-js-res-render-function/
 //Learned about render and using locals 
 
+// Date: 7/19/2025
+// https://iamwebwiz.medium.com/how-to-fix-dirname-is-not-defined-in-es-module-scope-34d94a86694d
+// Learned how to fix CommonJS issues with ES modules
+
 // Date: 7/25/25
 // Adapted From
 //https://www.geeksforgeeks.org/node-js/how-to-handle-sessions-in-express/
@@ -24,9 +28,24 @@
 //Learned about _id and its usage in mongodb
 
 // Date: 7/28/25
-//Adapted From
+// Adapted From
 // https://www.geeksforgeeks.org/mongodb/mongoose-document-model-create-api/\
 // Learned about using create for mongoose
+
+// Date: 8/1/25
+// Adapted from:
+// https://www.mongodb.com/docs/manual/aggregation/
+// Learned about aggregation operations in mongoDB
+
+// Date: 8/1/25
+// Adapted from:
+// https://www.geeksforgeeks.org/mongodb/aggregation-in-mongodb/
+// Learned how to use queries
+
+// Date: 8/1/25
+// Learned how to use queries
+// Adapted from: https://www.mongodb.com/docs/manual/reference/method/db.collection.aggregate/
+// How to implement Aggregate Pipeline operations
 
 // Date 8/4/2025
 // Using vercel with express
@@ -155,6 +174,46 @@ const data = {
 await Application.create(data);
 res.redirect("/applications");
 });
+
+// Populate edit application page
+app.get('/applications/edit/:id', (req,res) => {
+
+    Application
+        .findById(req.params.id)
+        .then(data => res.render("editApplications", { application: data }))
+        .catch(error =>
+                {console.error("Error in retrieving application", error)
+                res.status(500).json({
+            message:"Failed to retrieve application. Please try again.",
+            error: error.message,
+    })
+    })
+})
+
+// update application route 
+app.post("/applications/edit/:id", (req, res) => {
+    Application
+            .findByIdAndUpdate(
+                req.params.id,
+                {
+                    userId: req.session.user._id,
+                    company: req.body.company,
+                    type: req.body.type,
+                    date: req.body.date,
+                    status: req.body.status,
+                },
+                { new: true }
+            ) // Returns the updated application
+            .then(data => res.redirect("/applications"))
+            .catch(error => {
+                console.error("Unable to update", error)
+                res.status(500).json({
+                    message:"Failed to update application. Please try again.",
+                    error: error.message,
+                })
+            })
+})
+
 
 // Delete application route
 app.post('/applications/delete/:id', (req, res) => {
