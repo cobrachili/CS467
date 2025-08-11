@@ -13,6 +13,10 @@
 //https://www.geeksforgeeks.org/web-tech/express-js-res-render-function/
 //Learned about render and using locals 
 
+// Date: 7/19/2025
+// https://iamwebwiz.medium.com/how-to-fix-dirname-is-not-defined-in-es-module-scope-34d94a86694d
+// Learned how to fix CommonJS issues with ES modules
+
 // Date: 7/25/25
 // Adapted From
 //https://www.geeksforgeeks.org/node-js/how-to-handle-sessions-in-express/
@@ -24,9 +28,24 @@
 //Learned about _id and its usage in mongodb
 
 // Date: 7/28/25
-//Adapted From
+// Adapted From
 // https://www.geeksforgeeks.org/mongodb/mongoose-document-model-create-api/\
 // Learned about using create for mongoose
+
+// Date: 8/1/25
+// Adapted from:
+// https://www.mongodb.com/docs/manual/aggregation/
+// Learned about aggregation operations in mongoDB
+
+// Date: 8/1/25
+// Adapted from:
+// https://www.geeksforgeeks.org/mongodb/aggregation-in-mongodb/
+// Learned how to use queries
+
+// Date: 8/1/25
+// Learned how to use queries
+// Adapted from: https://www.mongodb.com/docs/manual/reference/method/db.collection.aggregate/
+// How to implement Aggregate Pipeline operations
 
 // Date 8/4/2025
 // Using vercel with express
