@@ -93,7 +93,7 @@ Once a contact is added, users can also edit the contact by clicking on the Edit
 
 Users can add skills by typing in the name of skill in the Type field. They can select a skill level from the list. Skill levels choices are Beginner, Intermediate, and Advanced. Users can also choose a category for that skill. The options for the skills category are Life, Technical, Leadership, Organization or Other.
 
-**Bibliography**
+**References**
 
 [1]“Login and Signup tutorial with nodejs, express & mongodb,” www.youtube.com. https://www.youtube.com/watch?v=V8dYGNfHjfk (accessed Jul. 18, 2025).
 
