@@ -30,7 +30,7 @@ If not successful, a message from the console log in mongodb.js will print “fa
 Open browser and goto http://localhost:3131
 
 
-Option 3: Using a local database
+Option 2: Using a local database
 In this example, we will use a local host from mongodb compass.
 Goto the mongodb.js file
 Remove the mongodb+srv line in .connect and put this port: mongodb://localhost:27017
